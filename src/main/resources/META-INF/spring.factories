@@ -1,0 +1,5 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+endorsed.org.springframework.boot.autoconfigure.mongo.ReactiveMongoAutoConfiguration,\
+endorsed.org.springframework.boot.autoconfigure.mongo.embedded.EmbeddedMongoAutoConfiguration,\
+endorsed.org.springframework.boot.autoconfigure.data.mongo.ReactiveMongoDataAutoConfiguration,\
+endorsed.org.springframework.boot.autoconfigure.data.mongo.ReactiveMongoRepositoriesAutoConfiguration
