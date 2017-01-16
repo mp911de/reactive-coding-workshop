@@ -13,24 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.dogepool.reactiveboot.domain;
+package org.dogepool.reactiveboot.controller;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NonNull;
-import lombok.Value;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author Mark Paluch
  */
-@Value
-@AllArgsConstructor
-@Builder
-public class UserProfile {
+@RestController
+public class MinerController {
 
-	@NonNull
-	String avatarUrl;
-
-	@NonNull
-	String smallAvatarUrl;
 }
