@@ -13,32 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.dogepool.reactiveboot.view.model;
+package org.dogepool.reactiveboot.domain;
 
-import lombok.Value;
-import org.dogepool.reactiveboot.domain.User;
-import org.dogepool.reactiveboot.domain.UserStat;
+import org.springframework.data.repository.reactive.ReactiveCrudRepository;
 
 /**
  * @author Mark Paluch
  */
-@Value
-public class MinerModel {
-
-	String displayName;
-
-	String nickname;
-
-	String bio;
-
-	long rankByCoins;
-
-	long rankByHash;
-
-	public static MinerModel of(User user, UserStat userStat) {
-
-		MinerModel minerModel = new MinerModel(user.getDisplayName(), user.getNickname(),
-				null, userStat.getRankByCoins(), userStat.getRankByHash());
-		return minerModel;
-	}
+public interface UserRepository extends ReactiveCrudRepository<User, String> {
 }

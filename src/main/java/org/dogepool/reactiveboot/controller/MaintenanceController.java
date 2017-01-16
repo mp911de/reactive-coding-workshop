@@ -13,29 +13,29 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.dogepool.reactiveboot.view.model;
-
-import java.util.List;
+package org.dogepool.reactiveboot.controller;
 
 import lombok.AccessLevel;
-import lombok.Data;
+import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
-import org.dogepool.reactiveboot.domain.UserStat;
+import org.dogepool.reactiveboot.service.CalculateRanks;
+import reactor.core.publisher.Mono;
+
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author Mark Paluch
  */
-@Data
-@FieldDefaults(level = AccessLevel.PRIVATE)
-public class IndexModel {
+@RestController
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
+@RequiredArgsConstructor
+public class MaintenanceController {
 
-	List<UserStat> hashLadder;
+	CalculateRanks calculateRanks;
 
-	List<UserStat> coinsLadder;
-
-	String poolName;
-
-	int miningUserCount;
-
-	Double gigaHashrate;
+	@PostMapping("maintenance/ranks")
+	public Mono<Long> recalculateRanks() {
+		return calculateRanks.recalculateRanks();
+	}
 }

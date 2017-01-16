@@ -13,32 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.dogepool.reactiveboot.view.model;
+package org.dogepool.reactiveboot.domain;
 
-import lombok.Value;
-import org.dogepool.reactiveboot.domain.User;
-import org.dogepool.reactiveboot.domain.UserStat;
+import org.bson.types.ObjectId;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
+
+import org.springframework.data.repository.reactive.ReactiveCrudRepository;
 
 /**
  * @author Mark Paluch
  */
-@Value
-public class MinerModel {
+public interface UserStatRepository extends ReactiveCrudRepository<UserStat, ObjectId> {
 
-	String displayName;
+	Flux<UserStat> findTop10ByOrderByHashrateDesc();
 
-	String nickname;
+	Flux<UserStat> findTop10ByOrderByTotalCoinsMinedDesc();
 
-	String bio;
-
-	long rankByCoins;
-
-	long rankByHash;
-
-	public static MinerModel of(User user, UserStat userStat) {
-
-		MinerModel minerModel = new MinerModel(user.getDisplayName(), user.getNickname(),
-				null, userStat.getRankByCoins(), userStat.getRankByHash());
-		return minerModel;
-	}
+	Mono<UserStat> findByUserId(String userId);
 }

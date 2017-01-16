@@ -67,14 +67,14 @@ class GenerateUsers {
 							.build();
 				}).collectList().block();
 
-		List<UserStat> userStats = Flux
-				.fromIterable(users)
-				.map(user -> {
+		List<UserStat> userStats = Flux.fromIterable(users).map(user -> {
 
-					ThreadLocalRandom random = ThreadLocalRandom.current();
-					return new UserStat(user.getId(), random.nextDouble(1, 100), random
-							.nextLong(1, 1000));
-				}).collectList().block();
+			ThreadLocalRandom random = ThreadLocalRandom.current();
+			double hashrate = random.nextDouble(1, 100) * 1000d * 1000d;
+			long totalCoinsMined = random.nextLong(1, 1000);
+
+			return new UserStat(null, user.getId(), hashrate, totalCoinsMined, 0, 0);
+		}).collectList().block();
 
 		objectMapper.writeValue(new File("target/users.json"), users);
 		objectMapper.writeValue(new File("target/user-stats.json"), userStats);

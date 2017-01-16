@@ -15,7 +15,9 @@
  */
 package org.dogepool.reactiveboot.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Value;
+import org.bson.types.ObjectId;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -26,9 +28,16 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document
 public class UserStat {
 
+	@JsonIgnore
+	ObjectId id;
+
 	String userId;
 
 	double hashrate;
 
 	long totalCoinsMined;
+
+	long rankByCoins;
+
+	long rankByHash;
 }
