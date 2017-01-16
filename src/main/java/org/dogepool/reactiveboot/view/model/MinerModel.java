@@ -35,10 +35,16 @@ public class MinerModel {
 
 	long rankByHash;
 
+	String avatarUrl;
+
+	String smallAvatarUrl;
+
 	public static MinerModel of(User user, UserStat userStat) {
 
 		MinerModel minerModel = new MinerModel(user.getDisplayName(), user.getNickname(),
-				null, userStat.getRankByCoins(), userStat.getRankByHash());
+				null, userStat.getRankByCoins(), userStat.getRankByHash(), user
+						.getUserProfile().getAvatarUrl(), user.getUserProfile()
+						.getSmallAvatarUrl());
 		return minerModel;
 	}
 }

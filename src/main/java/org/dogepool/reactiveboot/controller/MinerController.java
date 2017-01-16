@@ -18,7 +18,6 @@ package org.dogepool.reactiveboot.controller;
 import java.nio.ByteBuffer;
 import java.util.Optional;
 
-import io.netty.buffer.ByteBuf;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -29,46 +28,57 @@ import org.dogepool.reactiveboot.domain.UserStatRepository;
 import org.dogepool.reactiveboot.view.model.MinerModel;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-import reactor.ipc.netty.http.client.HttpClient;
 
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.client.reactive.ReactorClientHttpConnector;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.util.MimeType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.reactive.function.client.ClientRequest;
+import org.springframework.web.reactive.function.client.ExchangeFilterFunction;
+import org.springframework.web.reactive.function.client.WebClient;
+
+import static org.springframework.web.reactive.function.client.ClientRequest.GET;
 
 /**
  * @author Mark Paluch
  */
-@RestController
+@Controller
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 @RequiredArgsConstructor
 public class MinerController {
 
 	UserRepository userRepository;
 	UserStatRepository userStatRepository;
-	HttpClient httpClient = HttpClient.create();
+	WebClient webClient = WebClient.builder(new ReactorClientHttpConnector())
+			.filter(userAgent()).build();
 
-	@GetMapping("/miners/{id}")
-	Mono<MinerModel> getMiner(@PathVariable String id) {
+	@GetMapping("/miner/{id}")
+	String getMiner(@PathVariable String id, Model model) {
 
-		return userRepository.findOne(id)
+		Mono<MinerModel> compositeModel = userRepository.findOne(id)
 				.and(user -> userStatRepository.findByUserId(user.getId()))
-				.map(tuple -> {
+				.map(tuple -> MinerModel.of(tuple.getT1(), tuple.getT2()));
 
-					return MinerModel.of(tuple.getT1(), tuple.getT2());
-				});
+		model.addAttribute("model", compositeModel);
+
+		return "miner";
 	}
 
-	@GetMapping("/miners/{id}/avatar")
+	@GetMapping("/miner/{id}/avatar")
+	@ResponseBody
 	Mono<ResponseEntity<Flux<ByteBuffer>>> getAvatar(@PathVariable String id) {
 		return fetchAvatar(userRepository.findOne(id).map(User::getUserProfile)
 				.map(UserProfile::getAvatarUrl));
 	}
 
-	@GetMapping("/miners/{id}/avatar/small")
+	@GetMapping("/miner/{id}/avatar/small")
+	@ResponseBody
 	Mono<ResponseEntity<Flux<ByteBuffer>>> getSmallAvatar(@PathVariable String id) {
 		return fetchAvatar(userRepository.findOne(id).map(User::getUserProfile)
 				.map(UserProfile::getSmallAvatarUrl));
@@ -77,18 +87,29 @@ public class MinerController {
 	private Mono<ResponseEntity<Flux<ByteBuffer>>> fetchAvatar(Mono<String> map) {
 
 		return map
-				.flatMap(httpClient::get)
+				.map(s -> GET(s))
+				.flatMap(headersBuilder -> webClient.exchange(headersBuilder.build()))
 				.map(resp -> {
 
 					HttpHeaders headers = new HttpHeaders();
 
-					Optional<String> asString = Optional.ofNullable(resp
-							.responseHeaders().getAsString(HttpHeaders.CONTENT_TYPE));
-					headers.add(HttpHeaders.CONTENT_TYPE,
-							asString.orElse(MediaType.IMAGE_JPEG_VALUE));
-					return new ResponseEntity<>(resp.receive().map(ByteBuf::nioBuffer),
-							headers, HttpStatus.valueOf(resp.status().code()));
+					Optional<MediaType> asString = Optional.ofNullable(resp.headers()
+							.asHttpHeaders().getContentType());
+					headers.add(HttpHeaders.CONTENT_TYPE, asString
+							.map(MimeType::toString).orElse(MediaType.IMAGE_JPEG_VALUE));
+
+					return new ResponseEntity<>(resp.bodyToFlux(ByteBuffer.class),
+							headers, resp.statusCode());
 
 				}).next();
 	}
+
+	private ExchangeFilterFunction userAgent() {
+		return (clientRequest, exchangeFunction) -> {
+			ClientRequest newRequest = ClientRequest.from(clientRequest)
+					.header("User-Agent", "Spring Framework WebClient").build();
+			return exchangeFunction.exchange(newRequest);
+		};
+	}
+
 }

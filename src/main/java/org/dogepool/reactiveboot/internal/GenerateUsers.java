@@ -70,7 +70,7 @@ class GenerateUsers {
 		List<UserStat> userStats = Flux.fromIterable(users).map(user -> {
 
 			ThreadLocalRandom random = ThreadLocalRandom.current();
-			double hashrate = random.nextDouble(1, 100) * 1000d * 1000d;
+			double hashrate = random.nextDouble(1, 100);
 			long totalCoinsMined = random.nextLong(1, 1000);
 
 			return new UserStat(null, user.getId(), hashrate, totalCoinsMined, 0, 0);

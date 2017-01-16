@@ -15,46 +15,42 @@
  */
 package org.dogepool.reactiveboot.controller;
 
-import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import org.dogepool.reactiveboot.config.DogeProperties;
 import org.dogepool.reactiveboot.domain.UserStat;
 import org.dogepool.reactiveboot.domain.UserStatRepository;
-import org.dogepool.reactiveboot.view.model.IndexModel;
 import reactor.core.publisher.Flux;
-import reactor.core.publisher.Mono;
 
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author Mark Paluch
  */
-@RestController
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 @RequiredArgsConstructor
+@Controller
 public class IndexController {
 
 	UserStatRepository userStatRepository;
+	DogeProperties dogeProperties;
 
 	@GetMapping(path = "/")
-	Mono<IndexModel> indexModel() {
+	String indexModel(Model model) {
 
-		Flux<UserStat> top10ByOrderByHashrate = userStatRepository
-				.findTop10ByOrderByHashrateDesc();
-		Flux<UserStat> top10ByOrderByTotalCoinsMined = userStatRepository
-				.findTop10ByOrderByTotalCoinsMinedDesc();
+		model.addAttribute("poolName", dogeProperties.getPoolName());
+		model.addAttribute("hashLadder",
+				userStatRepository.findTop10ByOrderByHashrateDesc());
 
-		IndexModel indexModel = new IndexModel();
-
-		Mono<List<UserStat>> list1Mono = top10ByOrderByHashrate.collectList()
-				.doOnSuccess(indexModel::setHashLadder);
-		Mono<List<UserStat>> list2Mono = top10ByOrderByTotalCoinsMined.collectList()
-				.doOnSuccess(indexModel::setCoinsLadder);
+		model.addAttribute("coinsLadder",
+				userStatRepository.findTop10ByOrderByTotalCoinsMinedDesc());
 
 		AtomicLong hashrate = new AtomicLong();
 		AtomicInteger users = new AtomicInteger();
@@ -65,13 +61,22 @@ public class IndexController {
 				.doOnNext(userStat -> users.incrementAndGet())
 				.doOnComplete(
 						() -> {
-							indexModel.setGigaHashrate(hashrate.doubleValue()
-									/ (1000d * 1000d * 1000d));
-							indexModel.setMiningUserCount(users.get());
+
+							model.addAttribute("gigaHashrate", hashrate.doubleValue());
+							model.addAttribute("miningUserCount", users.get());
 						});
 
-		return Flux.merge(list1Mono, list2Mono, userStatFlux).then()
-				.then(Mono.just(indexModel));
-
+		model.addAttribute("userStatFlux", userStatFlux);
+		return "index";
 	}
+
+	@ExceptionHandler
+	public String genericHandler(Exception e, Model model) {
+
+		model.addAttribute("status", e.getClass().getSimpleName());
+		model.addAttribute("error", e.getMessage());
+
+		return "error";
+	}
+
 }

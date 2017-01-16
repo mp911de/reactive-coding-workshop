@@ -13,29 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.dogepool.reactiveboot.view.model;
-
-import java.util.List;
+package org.dogepool.reactiveboot.config;
 
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.experimental.FieldDefaults;
-import org.dogepool.reactiveboot.domain.UserStat;
+import org.hibernate.validator.constraints.NotEmpty;
+
+import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
  * @author Mark Paluch
  */
+@ConfigurationProperties("dogecoin")
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class IndexModel {
+public class DogeProperties {
 
-	List<UserStat> hashLadder;
-
-	List<UserStat> coinsLadder;
-
+	@NotEmpty
 	String poolName;
 
-	int miningUserCount;
-
-	Double gigaHashrate;
 }
