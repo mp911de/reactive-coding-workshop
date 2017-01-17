@@ -33,6 +33,9 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Component;
 
 /**
+ * Data initializer to import user and user statistics data from {@code users.json} and
+ * {@code user-stats.json}
+ *
  * @author Mark Paluch
  */
 @Component
@@ -49,17 +52,17 @@ public class DataInitializer {
 		mongoTemplate.remove(new Query(), UserStat.class);
 		mongoTemplate.remove(new Query(), User.class);
 
+		List<User> users = objectMapper.readValue(getClass().getResource("/users.json"),
+				new TypeReference<List<User>>() {
+				});
+
+		mongoTemplate.insertAll(users);
+
 		List<UserStat> userStats = objectMapper.readValue(
 				getClass().getResource("/user-stats.json"),
 				new TypeReference<List<UserStat>>() {
 				});
 
 		mongoTemplate.insertAll(userStats);
-
-		List<User> users = objectMapper.readValue(getClass().getResource("/users.json"),
-				new TypeReference<List<User>>() {
-				});
-
-		mongoTemplate.insertAll(users);
 	}
 }

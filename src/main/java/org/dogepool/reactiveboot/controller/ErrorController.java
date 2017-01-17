@@ -13,19 +13,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.dogepool.reactiveboot.domain;
+package org.dogepool.reactiveboot.controller;
 
-import org.bson.types.ObjectId;
-
-import org.springframework.data.repository.reactive.ReactiveCrudRepository;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 
 /**
- * Reactive repository for {@link UserStat} domain objects.
- *
  * @author Mark Paluch
  */
-public interface UserStatRepository extends ReactiveCrudRepository<UserStat, ObjectId> {
+@Controller
+public class ErrorController {
 
-	// TODO: Implement reactive query methods.
-	// See IndexController and MinerController for requirements
+	@ExceptionHandler
+	public String genericHandler(Exception e, Model model) {
+
+		model.addAttribute("status", e.getClass().getSimpleName());
+		model.addAttribute("error", e.getMessage());
+
+		return "error";
+	}
+
 }

@@ -20,15 +20,12 @@ import lombok.Builder;
 import lombok.NonNull;
 import lombok.Value;
 
-import org.springframework.data.mongodb.core.mapping.Document;
-
 /**
  * @author Mark Paluch
  */
 @AllArgsConstructor
 @Value
 @Builder
-@Document
 public class User {
 
 	String id;

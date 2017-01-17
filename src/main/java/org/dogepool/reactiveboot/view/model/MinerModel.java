@@ -29,8 +29,6 @@ public class MinerModel {
 
 	String nickname;
 
-	String bio;
-
 	long rankByCoins;
 
 	long rankByHash;
@@ -41,10 +39,9 @@ public class MinerModel {
 
 	public static MinerModel of(User user, UserStat userStat) {
 
-		MinerModel minerModel = new MinerModel(user.getDisplayName(), user.getNickname(),
-				null, userStat.getRankByCoins(), userStat.getRankByHash(), user
+		return new MinerModel(user.getDisplayName(), user.getNickname(),
+				userStat.getRankByCoins(), userStat.getRankByHash(), user
 						.getUserProfile().getAvatarUrl(), user.getUserProfile()
 						.getSmallAvatarUrl());
-		return minerModel;
 	}
 }

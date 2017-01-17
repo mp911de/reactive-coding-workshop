@@ -35,6 +35,7 @@ import org.springframework.web.client.RestTemplate;
 
 /**
  * Utility to generate random user data.
+ *
  * @author Mark Paluch
  */
 @Slf4j

@@ -20,19 +20,26 @@ import org.springframework.boot.web.reactive.context.ReactiveWebApplicationConte
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.reactive.config.ViewResolverRegistry;
-import org.springframework.web.reactive.config.WebReactiveConfigurer;
+import org.springframework.web.reactive.config.WebFluxConfigurer;
 import org.springframework.web.reactive.result.view.freemarker.FreeMarkerConfigurer;
 
 /**
+ * Web configuration to configure Freemarker as available
+ * {@link org.springframework.web.reactive.result.view.ViewResolver}.
+ *
  * @author Brian Clozel
  * @author Mark Paluch
+ * @see FreeMarkerConfigurer
+ * @see ViewResolverRegistry
+ * @see WebFluxConfigurer
  */
 @Configuration
 @EnableConfigurationProperties(DogeProperties.class)
-public class WebConfig implements WebReactiveConfigurer {
+public class WebConfig implements WebFluxConfigurer {
 
 	@Bean
-	public FreeMarkerConfigurer freeMarkerConfigurer(ReactiveWebApplicationContext applicationContext) {
+	public FreeMarkerConfigurer freeMarkerConfigurer(
+			ReactiveWebApplicationContext applicationContext) {
 
 		FreeMarkerConfigurer configurer = new FreeMarkerConfigurer();
 

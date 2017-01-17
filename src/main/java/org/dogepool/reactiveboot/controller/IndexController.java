@@ -15,20 +15,15 @@
  */
 package org.dogepool.reactiveboot.controller;
 
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.concurrent.atomic.AtomicLong;
-
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.dogepool.reactiveboot.config.DogeProperties;
-import org.dogepool.reactiveboot.domain.UserStat;
 import org.dogepool.reactiveboot.domain.UserStatRepository;
 import reactor.core.publisher.Flux;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 
 /**
@@ -43,40 +38,27 @@ public class IndexController {
 	DogeProperties dogeProperties;
 
 	@GetMapping(path = "/")
-	String indexModel(Model model) {
+	String getIndex(Model model) {
 
 		model.addAttribute("poolName", dogeProperties.getPoolName());
+
+		// TODO: Add a reactive query method to find the top 10 users (UserStat objects)
+		// ordered descending by hash rate.
 		model.addAttribute("hashLadder",
-				userStatRepository.findTop10ByOrderByHashrateDesc());
+		// userStatRepository.findTop10ByOrderByHashrateDesc());
+				Flux.empty());
 
+		// TODO: Add a reactive query method to find the top 10 users (UserStat objects)
+		// ordered descending by total coins mined.
 		model.addAttribute("coinsLadder",
-				userStatRepository.findTop10ByOrderByTotalCoinsMinedDesc());
+		// userStatRepository.findTop10ByOrderByTotalCoinsMinedDesc());
+				Flux.empty());
 
-		AtomicLong hashrate = new AtomicLong();
-		AtomicInteger users = new AtomicInteger();
+		// TODO: Calculate the overall gigaHashrate and miningUserCount taking
+		// a reactive approach
+		model.addAttribute("gigaHashrate", -1d);
+		model.addAttribute("miningUserCount", -1);
 
-		Flux<UserStat> userStatFlux = userStatRepository
-				.findAll()
-				.doOnNext(userStat -> hashrate.addAndGet((long) userStat.getHashrate()))
-				.doOnNext(userStat -> users.incrementAndGet())
-				.doOnComplete(
-						() -> {
-
-							model.addAttribute("gigaHashrate", hashrate.doubleValue());
-							model.addAttribute("miningUserCount", users.get());
-						});
-
-		model.addAttribute("userStatFlux", userStatFlux);
 		return "index";
 	}
-
-	@ExceptionHandler
-	public String genericHandler(Exception e, Model model) {
-
-		model.addAttribute("status", e.getClass().getSimpleName());
-		model.addAttribute("error", e.getMessage());
-
-		return "error";
-	}
-
 }

@@ -18,7 +18,6 @@ package org.dogepool.reactiveboot.controller;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
-import org.dogepool.reactiveboot.service.CalculateRanks;
 import reactor.core.publisher.Mono;
 
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,10 +31,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class MaintenanceController {
 
-	CalculateRanks calculateRanks;
+	// CalculateRanks calculateRanks;
 
 	@PostMapping("maintenance/ranks")
 	public Mono<Long> recalculateRanks() {
-		return calculateRanks.recalculateRanks();
+
+		// return calculateRanks.recalculateRanks();
+		return Mono.empty();
 	}
 }

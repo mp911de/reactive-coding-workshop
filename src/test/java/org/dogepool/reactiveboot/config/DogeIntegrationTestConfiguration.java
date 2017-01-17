@@ -13,19 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.dogepool.reactiveboot.domain;
+package org.dogepool.reactiveboot.config;
 
-import org.bson.types.ObjectId;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 
-import org.springframework.data.repository.reactive.ReactiveCrudRepository;
-
-/**
- * Reactive repository for {@link UserStat} domain objects.
+/*
+ * Configuration class for integration test use.
  *
  * @author Mark Paluch
  */
-public interface UserStatRepository extends ReactiveCrudRepository<UserStat, ObjectId> {
-
-	// TODO: Implement reactive query methods.
-	// See IndexController and MinerController for requirements
+@Import({ MongoTestConfiguration.class })
+@EnableConfigurationProperties(DogeProperties.class)
+@Configuration
+public class DogeIntegrationTestConfiguration {
 }

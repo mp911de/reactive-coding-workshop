@@ -19,13 +19,10 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Value;
 import org.bson.types.ObjectId;
 
-import org.springframework.data.mongodb.core.mapping.Document;
-
 /**
  * @author Mark Paluch
  */
 @Value
-@Document
 public class UserStat {
 
 	@JsonIgnore

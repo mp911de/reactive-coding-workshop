@@ -18,6 +18,11 @@ package org.dogepool.reactiveboot;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+/**
+ * Main class to start the application. <br/>
+ * Open <a href="http://localhost:8080/">http://localhost:8080/</a> in your browser as
+ * soon the application is running.
+ */
 @SpringBootApplication
 public class ReactiveCodingWorkshopApplication {
 
