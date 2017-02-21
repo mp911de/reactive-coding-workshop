@@ -17,11 +17,12 @@
 <div class="ui main container">
 	<div class="ui card">
 		<a class="image" href="#">
-			<img src="${model.avatarUrl}" width=50 height=50/>
+			<img src="/miner/${model.nickname}/avatar" width=50 height=50/>
 		</a>
 		<div class="content">
 			<div class="header">
-				<div class="right floated author"><img src="${model.smallAvatarUrl}"
+				<div class="right floated author"><img
+						src="/miner/${model.nickname}/avatar/small"
 													   class="ui avatar image"/> ${model.nickname}
 				</div>
             ${model.displayName}
