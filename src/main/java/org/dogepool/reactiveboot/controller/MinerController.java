@@ -20,6 +20,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.dogepool.reactiveboot.domain.UserRepository;
 import org.dogepool.reactiveboot.domain.UserStatRepository;
+import org.dogepool.reactiveboot.view.model.MinerModel;
 import reactor.core.publisher.Mono;
 
 import org.springframework.http.client.reactive.ReactorClientHttpConnector;
@@ -48,8 +49,11 @@ public class MinerController {
 	@GetMapping("/miner/{id}")
 	String getMiner(@PathVariable String id, Model model) {
 
-		// Mono<MinerModel> compositeModel = …;
-		model.addAttribute("model", Mono.empty());
+		Mono<MinerModel> compositeModel = userRepository.findOne(id)
+				.and(user -> userStatRepository.findByUserId(user.getId()))
+				.map(tuple -> MinerModel.of(tuple.getT1(), tuple.getT2()));
+
+		model.addAttribute("model", compositeModel);
 
 		return "miner";
 	}

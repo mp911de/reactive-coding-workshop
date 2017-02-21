@@ -17,6 +17,7 @@ package org.dogepool.reactiveboot.domain;
 
 import org.bson.types.ObjectId;
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 import org.springframework.data.repository.reactive.ReactiveCrudRepository;
 
@@ -30,4 +31,6 @@ public interface UserStatRepository extends ReactiveCrudRepository<UserStat, Obj
 	Flux<UserStat> findTop10ByOrderByHashrateDesc();
 
 	Flux<UserStat> findTop10ByOrderByTotalCoinsMinedDesc();
+
+	Mono<UserStat> findByUserId(String id);
 }
