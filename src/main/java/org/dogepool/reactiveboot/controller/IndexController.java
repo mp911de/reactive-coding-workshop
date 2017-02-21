@@ -15,11 +15,16 @@
  */
 package org.dogepool.reactiveboot.controller;
 
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicLong;
+
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.dogepool.reactiveboot.config.DogeProperties;
+import org.dogepool.reactiveboot.domain.UserStat;
 import org.dogepool.reactiveboot.domain.UserStatRepository;
+import reactor.core.publisher.Flux;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -54,10 +59,18 @@ public class IndexController {
 						userStat -> hashrateFilter == null
 								|| userStat.getHashrate() > hashrateFilter));
 
-		// TODO: Calculate the overall gigaHashrate and miningUserCount taking
-		// a reactive approach
-		model.addAttribute("gigaHashrate", -1d);
-		model.addAttribute("miningUserCount", -1);
+		AtomicLong hashrate = new AtomicLong();
+		AtomicInteger users = new AtomicInteger();
+
+		Flux<UserStat> userStatFlux = userStatRepository.findAll()
+				.doOnNext(userStat -> hashrate.addAndGet((long) userStat.getHashrate()))
+				.doOnNext(userStat -> users.incrementAndGet()).doOnComplete(() -> {
+
+					model.addAttribute("gigaHashrate", hashrate.doubleValue());
+					model.addAttribute("miningUserCount", users.get());
+				});
+
+		model.addAttribute("userStatFlux", userStatFlux);
 
 		model.addAttribute("hashrateFilter", hashrateFilter != null ? hashrateFilter : "");
 
