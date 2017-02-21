@@ -36,9 +36,7 @@ public class GettingStartedTests {
 	@Test
 	public void monoShouldCreateScalarValue() {
 
-		// TODO: Replace this line with an implementation creates a Mono from the value
-		// "Hello, World"
-		Mono<String> mono = Mono.empty();
+		Mono<String> mono = Mono.just("Hello, World");
 
 		mono.subscribe(s -> System.out.println(s));
 	}
@@ -48,8 +46,7 @@ public class GettingStartedTests {
 
 		Mono<String> mono = Mono.just("Hello");
 
-		// TODO: Map the Mono value to "Hello, World" by appending ", World" to the
-		// emitted value
+		mono = mono.map(s -> String.format("%s, World", s));
 
 		mono.subscribe(System.out::println);
 	}
@@ -59,8 +56,7 @@ public class GettingStartedTests {
 
 		Mono<String> mono = Mono.just("Hello");
 
-		// TODO: Map the Mono value to "Hello, World" by appending ", World" to the
-		// emitted value by using the flatMap operator
+		mono = mono.then(s -> Mono.just(String.format("%s, World", s)));
 
 		mono.subscribe(System.out::println);
 	}
@@ -70,8 +66,7 @@ public class GettingStartedTests {
 
 		Callable<String> myValue = () -> "Hello, World";
 
-		// TODO: Replace this line by creating a Mono from the Callable above
-		Mono<String> mono = Mono.empty();
+		Mono<String> mono = Mono.fromCallable(myValue);
 
 		mono.subscribe(System.out::println);
 	}
@@ -81,20 +76,17 @@ public class GettingStartedTests {
 
 		Scheduler elastic = Schedulers.elastic();
 
-		// TODO: Replace this line by creating a Mono that publishes its value on a
-		// different thread applying the Scheduler from above
 		Mono<String> mono = Mono.just("Hello, World");
 
-		mono.subscribe(System.out::println);
-		// Wait, why don't I see here anything?
+		mono = mono.subscribeOn(elastic).publishOn(elastic);
+
+		mono.doOnNext(s -> System.out.println(s)).subscribe().block();
 	}
 
 	@Test
 	public void fluxShouldCreateScalarValues() {
 
-		// TODO: Replace this line with an implementation creates a Flux from the values
-		// "Hello", "World"
-		Flux<String> flux = Flux.empty();
+		Flux<String> flux = Flux.just("Hello", "World");
 
 		flux.subscribe(System.out::println);
 	}
@@ -104,8 +96,7 @@ public class GettingStartedTests {
 
 		List<String> strings = Arrays.asList("Hello", "World");
 
-		// TODO: Replace this line with an implementation creates a Flux from an Iterable
-		Flux<String> flux = Flux.empty();
+		Flux<String> flux = Flux.fromIterable(strings);
 
 		flux.subscribe(System.out::println);
 	}
@@ -116,9 +107,7 @@ public class GettingStartedTests {
 		Mono<String> hello = Mono.just("Hello");
 		Mono<String> world = Mono.just("World");
 
-		// TODO: Replace this line with an implementation that concatenates two Publishers
-		// into a Flux
-		Flux<String> flux = Flux.empty();
+		Flux<String> flux = Flux.concat(hello, world);
 
 		flux.subscribe(System.out::println);
 	}
@@ -128,7 +117,7 @@ public class GettingStartedTests {
 
 		Mono<String> mono = Mono.just("Hello, World");
 
-		Flux<String> flux = Flux.empty();
+		Flux<String> flux = mono.map(s -> s.split("")).flatMap(Flux::fromArray);
 
 		flux.subscribe(System.out::println);
 	}
