@@ -16,6 +16,7 @@
 package org.dogepool.reactiveboot.domain;
 
 import org.bson.types.ObjectId;
+import reactor.core.publisher.Flux;
 
 import org.springframework.data.repository.reactive.ReactiveCrudRepository;
 
@@ -26,6 +27,7 @@ import org.springframework.data.repository.reactive.ReactiveCrudRepository;
  */
 public interface UserStatRepository extends ReactiveCrudRepository<UserStat, ObjectId> {
 
-	// TODO: Implement reactive query methods.
-	// See IndexController and MinerController for requirements
+	Flux<UserStat> findTop10ByOrderByHashrateDesc();
+
+	Flux<UserStat> findTop10ByOrderByTotalCoinsMinedDesc();
 }

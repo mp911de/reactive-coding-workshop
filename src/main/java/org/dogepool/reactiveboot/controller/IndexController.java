@@ -20,7 +20,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.dogepool.reactiveboot.config.DogeProperties;
 import org.dogepool.reactiveboot.domain.UserStatRepository;
-import reactor.core.publisher.Flux;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -42,17 +41,11 @@ public class IndexController {
 
 		model.addAttribute("poolName", dogeProperties.getPoolName());
 
-		// TODO: Add a reactive query method to find the top 10 users (UserStat objects)
-		// ordered descending by hash rate.
 		model.addAttribute("hashLadder",
-		// userStatRepository.findTop10ByOrderByHashrateDesc());
-				Flux.empty());
+				userStatRepository.findTop10ByOrderByHashrateDesc());
 
-		// TODO: Add a reactive query method to find the top 10 users (UserStat objects)
-		// ordered descending by total coins mined.
 		model.addAttribute("coinsLadder",
-		// userStatRepository.findTop10ByOrderByTotalCoinsMinedDesc());
-				Flux.empty());
+				userStatRepository.findTop10ByOrderByTotalCoinsMinedDesc());
 
 		// TODO: Calculate the overall gigaHashrate and miningUserCount taking
 		// a reactive approach
