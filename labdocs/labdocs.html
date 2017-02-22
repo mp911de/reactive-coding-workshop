@@ -1,0 +1,1768 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 1.5.5">
+<meta name="author" content="Mark Paluch, Simon Baslé">
+<title>Reactive Coding Workshop with Spring Boot: Lab docs</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
+<style>
+/* Asciidoctor default stylesheet | MIT License | http://asciidoctor.org */
+/* Remove comment around @import statement below when using as a custom stylesheet */
+/*@import "https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700";*/
+article,aside,details,figcaption,figure,footer,header,hgroup,main,nav,section,summary{display:block}
+audio,canvas,video{display:inline-block}
+audio:not([controls]){display:none;height:0}
+[hidden],template{display:none}
+script{display:none!important}
+html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}
+a{background:transparent}
+a:focus{outline:thin dotted}
+a:active,a:hover{outline:0}
+h1{font-size:2em;margin:.67em 0}
+abbr[title]{border-bottom:1px dotted}
+b,strong{font-weight:bold}
+dfn{font-style:italic}
+hr{-moz-box-sizing:content-box;box-sizing:content-box;height:0}
+mark{background:#ff0;color:#000}
+code,kbd,pre,samp{font-family:monospace;font-size:1em}
+pre{white-space:pre-wrap}
+q{quotes:"\201C" "\201D" "\2018" "\2019"}
+small{font-size:80%}
+sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}
+sup{top:-.5em}
+sub{bottom:-.25em}
+img{border:0}
+svg:not(:root){overflow:hidden}
+figure{margin:0}
+fieldset{border:1px solid silver;margin:0 2px;padding:.35em .625em .75em}
+legend{border:0;padding:0}
+button,input,select,textarea{font-family:inherit;font-size:100%;margin:0}
+button,input{line-height:normal}
+button,select{text-transform:none}
+button,html input[type="button"],input[type="reset"],input[type="submit"]{-webkit-appearance:button;cursor:pointer}
+button[disabled],html input[disabled]{cursor:default}
+input[type="checkbox"],input[type="radio"]{box-sizing:border-box;padding:0}
+input[type="search"]{-webkit-appearance:textfield;-moz-box-sizing:content-box;-webkit-box-sizing:content-box;box-sizing:content-box}
+input[type="search"]::-webkit-search-cancel-button,input[type="search"]::-webkit-search-decoration{-webkit-appearance:none}
+button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0}
+textarea{overflow:auto;vertical-align:top}
+table{border-collapse:collapse;border-spacing:0}
+*,*:before,*:after{-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box}
+html,body{font-size:100%}
+body{background:#fff;color:rgba(0,0,0,.8);padding:0;margin:0;font-family:"Noto Serif","DejaVu Serif",serif;font-weight:400;font-style:normal;line-height:1;position:relative;cursor:auto;tab-size:4;-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased}
+a:hover{cursor:pointer}
+img,object,embed{max-width:100%;height:auto}
+object,embed{height:100%}
+img{-ms-interpolation-mode:bicubic}
+.left{float:left!important}
+.right{float:right!important}
+.text-left{text-align:left!important}
+.text-right{text-align:right!important}
+.text-center{text-align:center!important}
+.text-justify{text-align:justify!important}
+.hide{display:none}
+img,object,svg{display:inline-block;vertical-align:middle}
+textarea{height:auto;min-height:50px}
+select{width:100%}
+.center{margin-left:auto;margin-right:auto}
+.spread{width:100%}
+p.lead,.paragraph.lead>p,#preamble>.sectionbody>.paragraph:first-of-type p{font-size:1.21875em;line-height:1.6}
+.subheader,.admonitionblock td.content>.title,.audioblock>.title,.exampleblock>.title,.imageblock>.title,.listingblock>.title,.literalblock>.title,.stemblock>.title,.openblock>.title,.paragraph>.title,.quoteblock>.title,table.tableblock>.title,.verseblock>.title,.videoblock>.title,.dlist>.title,.olist>.title,.ulist>.title,.qlist>.title,.hdlist>.title{line-height:1.45;color:#7a2518;font-weight:400;margin-top:0;margin-bottom:.25em}
+div,dl,dt,dd,ul,ol,li,h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6,pre,form,p,blockquote,th,td{margin:0;padding:0;direction:ltr}
+a{color:#2156a5;text-decoration:underline;line-height:inherit}
+a:hover,a:focus{color:#1d4b8f}
+a img{border:none}
+p{font-family:inherit;font-weight:400;font-size:1em;line-height:1.6;margin-bottom:1.25em;text-rendering:optimizeLegibility}
+p aside{font-size:.875em;line-height:1.35;font-style:italic}
+h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{font-family:"Open Sans","DejaVu Sans",sans-serif;font-weight:300;font-style:normal;color:#ba3925;text-rendering:optimizeLegibility;margin-top:1em;margin-bottom:.5em;line-height:1.0125em}
+h1 small,h2 small,h3 small,#toctitle small,.sidebarblock>.content>.title small,h4 small,h5 small,h6 small{font-size:60%;color:#e99b8f;line-height:0}
+h1{font-size:2.125em}
+h2{font-size:1.6875em}
+h3,#toctitle,.sidebarblock>.content>.title{font-size:1.375em}
+h4,h5{font-size:1.125em}
+h6{font-size:1em}
+hr{border:solid #ddddd8;border-width:1px 0 0;clear:both;margin:1.25em 0 1.1875em;height:0}
+em,i{font-style:italic;line-height:inherit}
+strong,b{font-weight:bold;line-height:inherit}
+small{font-size:60%;line-height:inherit}
+code{font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;font-weight:400;color:rgba(0,0,0,.9)}
+ul,ol,dl{font-size:1em;line-height:1.6;margin-bottom:1.25em;list-style-position:outside;font-family:inherit}
+ul,ol,ul.no-bullet,ol.no-bullet{margin-left:1.5em}
+ul li ul,ul li ol{margin-left:1.25em;margin-bottom:0;font-size:1em}
+ul.square li ul,ul.circle li ul,ul.disc li ul{list-style:inherit}
+ul.square{list-style-type:square}
+ul.circle{list-style-type:circle}
+ul.disc{list-style-type:disc}
+ul.no-bullet{list-style:none}
+ol li ul,ol li ol{margin-left:1.25em;margin-bottom:0}
+dl dt{margin-bottom:.3125em;font-weight:bold}
+dl dd{margin-bottom:1.25em}
+abbr,acronym{text-transform:uppercase;font-size:90%;color:rgba(0,0,0,.8);border-bottom:1px dotted #ddd;cursor:help}
+abbr{text-transform:none}
+blockquote{margin:0 0 1.25em;padding:.5625em 1.25em 0 1.1875em;border-left:1px solid #ddd}
+blockquote cite{display:block;font-size:.9375em;color:rgba(0,0,0,.6)}
+blockquote cite:before{content:"\2014 \0020"}
+blockquote cite a,blockquote cite a:visited{color:rgba(0,0,0,.6)}
+blockquote,blockquote p{line-height:1.6;color:rgba(0,0,0,.85)}
+@media only screen and (min-width:768px){h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{line-height:1.2}
+h1{font-size:2.75em}
+h2{font-size:2.3125em}
+h3,#toctitle,.sidebarblock>.content>.title{font-size:1.6875em}
+h4{font-size:1.4375em}}
+table{background:#fff;margin-bottom:1.25em;border:solid 1px #dedede}
+table thead,table tfoot{background:#f7f8f7;font-weight:bold}
+table thead tr th,table thead tr td,table tfoot tr th,table tfoot tr td{padding:.5em .625em .625em;font-size:inherit;color:rgba(0,0,0,.8);text-align:left}
+table tr th,table tr td{padding:.5625em .625em;font-size:inherit;color:rgba(0,0,0,.8)}
+table tr.even,table tr.alt,table tr:nth-of-type(even){background:#f8f8f7}
+table thead tr th,table tfoot tr th,table tbody tr td,table tr td,table tfoot tr td{display:table-cell;line-height:1.6}
+h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{line-height:1.2;word-spacing:-.05em}
+h1 strong,h2 strong,h3 strong,#toctitle strong,.sidebarblock>.content>.title strong,h4 strong,h5 strong,h6 strong{font-weight:400}
+.clearfix:before,.clearfix:after,.float-group:before,.float-group:after{content:" ";display:table}
+.clearfix:after,.float-group:after{clear:both}
+*:not(pre)>code{font-size:.9375em;font-style:normal!important;letter-spacing:0;padding:.1em .5ex;word-spacing:-.15em;background-color:#f7f7f8;-webkit-border-radius:4px;border-radius:4px;line-height:1.45;text-rendering:optimizeSpeed;word-wrap:break-word}
+*:not(pre)>code.nobreak{word-wrap:normal}
+*:not(pre)>code.nowrap{white-space:nowrap}
+pre,pre>code{line-height:1.45;color:rgba(0,0,0,.9);font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;font-weight:400;text-rendering:optimizeSpeed}
+em em{font-style:normal}
+strong strong{font-weight:400}
+.keyseq{color:rgba(51,51,51,.8)}
+kbd{font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;display:inline-block;color:rgba(0,0,0,.8);font-size:.65em;line-height:1.45;background-color:#f7f7f7;border:1px solid #ccc;-webkit-border-radius:3px;border-radius:3px;-webkit-box-shadow:0 1px 0 rgba(0,0,0,.2),0 0 0 .1em white inset;box-shadow:0 1px 0 rgba(0,0,0,.2),0 0 0 .1em #fff inset;margin:0 .15em;padding:.2em .5em;vertical-align:middle;position:relative;top:-.1em;white-space:nowrap}
+.keyseq kbd:first-child{margin-left:0}
+.keyseq kbd:last-child{margin-right:0}
+.menuseq,.menu{color:rgba(0,0,0,.8)}
+b.button:before,b.button:after{position:relative;top:-1px;font-weight:400}
+b.button:before{content:"[";padding:0 3px 0 2px}
+b.button:after{content:"]";padding:0 2px 0 3px}
+p a>code:hover{color:rgba(0,0,0,.9)}
+#header,#content,#footnotes,#footer{width:100%;margin-left:auto;margin-right:auto;margin-top:0;margin-bottom:0;max-width:62.5em;*zoom:1;position:relative;padding-left:.9375em;padding-right:.9375em}
+#header:before,#header:after,#content:before,#content:after,#footnotes:before,#footnotes:after,#footer:before,#footer:after{content:" ";display:table}
+#header:after,#content:after,#footnotes:after,#footer:after{clear:both}
+#content{margin-top:1.25em}
+#content:before{content:none}
+#header>h1:first-child{color:rgba(0,0,0,.85);margin-top:2.25rem;margin-bottom:0}
+#header>h1:first-child+#toc{margin-top:8px;border-top:1px solid #ddddd8}
+#header>h1:only-child,body.toc2 #header>h1:nth-last-child(2){border-bottom:1px solid #ddddd8;padding-bottom:8px}
+#header .details{border-bottom:1px solid #ddddd8;line-height:1.45;padding-top:.25em;padding-bottom:.25em;padding-left:.25em;color:rgba(0,0,0,.6);display:-ms-flexbox;display:-webkit-flex;display:flex;-ms-flex-flow:row wrap;-webkit-flex-flow:row wrap;flex-flow:row wrap}
+#header .details span:first-child{margin-left:-.125em}
+#header .details span.email a{color:rgba(0,0,0,.85)}
+#header .details br{display:none}
+#header .details br+span:before{content:"\00a0\2013\00a0"}
+#header .details br+span.author:before{content:"\00a0\22c5\00a0";color:rgba(0,0,0,.85)}
+#header .details br+span#revremark:before{content:"\00a0|\00a0"}
+#header #revnumber{text-transform:capitalize}
+#header #revnumber:after{content:"\00a0"}
+#content>h1:first-child:not([class]){color:rgba(0,0,0,.85);border-bottom:1px solid #ddddd8;padding-bottom:8px;margin-top:0;padding-top:1rem;margin-bottom:1.25rem}
+#toc{border-bottom:1px solid #efefed;padding-bottom:.5em}
+#toc>ul{margin-left:.125em}
+#toc ul.sectlevel0>li>a{font-style:italic}
+#toc ul.sectlevel0 ul.sectlevel1{margin:.5em 0}
+#toc ul{font-family:"Open Sans","DejaVu Sans",sans-serif;list-style-type:none}
+#toc li{line-height:1.3334;margin-top:.3334em}
+#toc a{text-decoration:none}
+#toc a:active{text-decoration:underline}
+#toctitle{color:#7a2518;font-size:1.2em}
+@media only screen and (min-width:768px){#toctitle{font-size:1.375em}
+body.toc2{padding-left:15em;padding-right:0}
+#toc.toc2{margin-top:0!important;background-color:#f8f8f7;position:fixed;width:15em;left:0;top:0;border-right:1px solid #efefed;border-top-width:0!important;border-bottom-width:0!important;z-index:1000;padding:1.25em 1em;height:100%;overflow:auto}
+#toc.toc2 #toctitle{margin-top:0;margin-bottom:.8rem;font-size:1.2em}
+#toc.toc2>ul{font-size:.9em;margin-bottom:0}
+#toc.toc2 ul ul{margin-left:0;padding-left:1em}
+#toc.toc2 ul.sectlevel0 ul.sectlevel1{padding-left:0;margin-top:.5em;margin-bottom:.5em}
+body.toc2.toc-right{padding-left:0;padding-right:15em}
+body.toc2.toc-right #toc.toc2{border-right-width:0;border-left:1px solid #efefed;left:auto;right:0}}
+@media only screen and (min-width:1280px){body.toc2{padding-left:20em;padding-right:0}
+#toc.toc2{width:20em}
+#toc.toc2 #toctitle{font-size:1.375em}
+#toc.toc2>ul{font-size:.95em}
+#toc.toc2 ul ul{padding-left:1.25em}
+body.toc2.toc-right{padding-left:0;padding-right:20em}}
+#content #toc{border-style:solid;border-width:1px;border-color:#e0e0dc;margin-bottom:1.25em;padding:1.25em;background:#f8f8f7;-webkit-border-radius:4px;border-radius:4px}
+#content #toc>:first-child{margin-top:0}
+#content #toc>:last-child{margin-bottom:0}
+#footer{max-width:100%;background-color:rgba(0,0,0,.8);padding:1.25em}
+#footer-text{color:rgba(255,255,255,.8);line-height:1.44}
+.sect1{padding-bottom:.625em}
+@media only screen and (min-width:768px){.sect1{padding-bottom:1.25em}}
+.sect1+.sect1{border-top:1px solid #efefed}
+#content h1>a.anchor,h2>a.anchor,h3>a.anchor,#toctitle>a.anchor,.sidebarblock>.content>.title>a.anchor,h4>a.anchor,h5>a.anchor,h6>a.anchor{position:absolute;z-index:1001;width:1.5ex;margin-left:-1.5ex;display:block;text-decoration:none!important;visibility:hidden;text-align:center;font-weight:400}
+#content h1>a.anchor:before,h2>a.anchor:before,h3>a.anchor:before,#toctitle>a.anchor:before,.sidebarblock>.content>.title>a.anchor:before,h4>a.anchor:before,h5>a.anchor:before,h6>a.anchor:before{content:"\00A7";font-size:.85em;display:block;padding-top:.1em}
+#content h1:hover>a.anchor,#content h1>a.anchor:hover,h2:hover>a.anchor,h2>a.anchor:hover,h3:hover>a.anchor,#toctitle:hover>a.anchor,.sidebarblock>.content>.title:hover>a.anchor,h3>a.anchor:hover,#toctitle>a.anchor:hover,.sidebarblock>.content>.title>a.anchor:hover,h4:hover>a.anchor,h4>a.anchor:hover,h5:hover>a.anchor,h5>a.anchor:hover,h6:hover>a.anchor,h6>a.anchor:hover{visibility:visible}
+#content h1>a.link,h2>a.link,h3>a.link,#toctitle>a.link,.sidebarblock>.content>.title>a.link,h4>a.link,h5>a.link,h6>a.link{color:#ba3925;text-decoration:none}
+#content h1>a.link:hover,h2>a.link:hover,h3>a.link:hover,#toctitle>a.link:hover,.sidebarblock>.content>.title>a.link:hover,h4>a.link:hover,h5>a.link:hover,h6>a.link:hover{color:#a53221}
+.audioblock,.imageblock,.literalblock,.listingblock,.stemblock,.videoblock{margin-bottom:1.25em}
+.admonitionblock td.content>.title,.audioblock>.title,.exampleblock>.title,.imageblock>.title,.listingblock>.title,.literalblock>.title,.stemblock>.title,.openblock>.title,.paragraph>.title,.quoteblock>.title,table.tableblock>.title,.verseblock>.title,.videoblock>.title,.dlist>.title,.olist>.title,.ulist>.title,.qlist>.title,.hdlist>.title{text-rendering:optimizeLegibility;text-align:left;font-family:"Noto Serif","DejaVu Serif",serif;font-size:1rem;font-style:italic}
+table.tableblock>caption.title{white-space:nowrap;overflow:visible;max-width:0}
+.paragraph.lead>p,#preamble>.sectionbody>.paragraph:first-of-type p{color:rgba(0,0,0,.85)}
+table.tableblock #preamble>.sectionbody>.paragraph:first-of-type p{font-size:inherit}
+.admonitionblock>table{border-collapse:separate;border:0;background:none;width:100%}
+.admonitionblock>table td.icon{text-align:center;width:80px}
+.admonitionblock>table td.icon img{max-width:none}
+.admonitionblock>table td.icon .title{font-weight:bold;font-family:"Open Sans","DejaVu Sans",sans-serif;text-transform:uppercase}
+.admonitionblock>table td.content{padding-left:1.125em;padding-right:1.25em;border-left:1px solid #ddddd8;color:rgba(0,0,0,.6)}
+.admonitionblock>table td.content>:last-child>:last-child{margin-bottom:0}
+.exampleblock>.content{border-style:solid;border-width:1px;border-color:#e6e6e6;margin-bottom:1.25em;padding:1.25em;background:#fff;-webkit-border-radius:4px;border-radius:4px}
+.exampleblock>.content>:first-child{margin-top:0}
+.exampleblock>.content>:last-child{margin-bottom:0}
+.sidebarblock{border-style:solid;border-width:1px;border-color:#e0e0dc;margin-bottom:1.25em;padding:1.25em;background:#f8f8f7;-webkit-border-radius:4px;border-radius:4px}
+.sidebarblock>:first-child{margin-top:0}
+.sidebarblock>:last-child{margin-bottom:0}
+.sidebarblock>.content>.title{color:#7a2518;margin-top:0;text-align:center}
+.exampleblock>.content>:last-child>:last-child,.exampleblock>.content .olist>ol>li:last-child>:last-child,.exampleblock>.content .ulist>ul>li:last-child>:last-child,.exampleblock>.content .qlist>ol>li:last-child>:last-child,.sidebarblock>.content>:last-child>:last-child,.sidebarblock>.content .olist>ol>li:last-child>:last-child,.sidebarblock>.content .ulist>ul>li:last-child>:last-child,.sidebarblock>.content .qlist>ol>li:last-child>:last-child{margin-bottom:0}
+.literalblock pre,.listingblock pre:not(.highlight),.listingblock pre[class="highlight"],.listingblock pre[class^="highlight "],.listingblock pre.CodeRay,.listingblock pre.prettyprint{background:#f7f7f8}
+.sidebarblock .literalblock pre,.sidebarblock .listingblock pre:not(.highlight),.sidebarblock .listingblock pre[class="highlight"],.sidebarblock .listingblock pre[class^="highlight "],.sidebarblock .listingblock pre.CodeRay,.sidebarblock .listingblock pre.prettyprint{background:#f2f1f1}
+.literalblock pre,.literalblock pre[class],.listingblock pre,.listingblock pre[class]{-webkit-border-radius:4px;border-radius:4px;word-wrap:break-word;padding:1em;font-size:.8125em}
+.literalblock pre.nowrap,.literalblock pre[class].nowrap,.listingblock pre.nowrap,.listingblock pre[class].nowrap{overflow-x:auto;white-space:pre;word-wrap:normal}
+@media only screen and (min-width:768px){.literalblock pre,.literalblock pre[class],.listingblock pre,.listingblock pre[class]{font-size:.90625em}}
+@media only screen and (min-width:1280px){.literalblock pre,.literalblock pre[class],.listingblock pre,.listingblock pre[class]{font-size:1em}}
+.literalblock.output pre{color:#f7f7f8;background-color:rgba(0,0,0,.9)}
+.listingblock pre.highlightjs{padding:0}
+.listingblock pre.highlightjs>code{padding:1em;-webkit-border-radius:4px;border-radius:4px}
+.listingblock pre.prettyprint{border-width:0}
+.listingblock>.content{position:relative}
+.listingblock code[data-lang]:before{display:none;content:attr(data-lang);position:absolute;font-size:.75em;top:.425rem;right:.5rem;line-height:1;text-transform:uppercase;color:#999}
+.listingblock:hover code[data-lang]:before{display:block}
+.listingblock.terminal pre .command:before{content:attr(data-prompt);padding-right:.5em;color:#999}
+.listingblock.terminal pre .command:not([data-prompt]):before{content:"$"}
+table.pyhltable{border-collapse:separate;border:0;margin-bottom:0;background:none}
+table.pyhltable td{vertical-align:top;padding-top:0;padding-bottom:0;line-height:1.45}
+table.pyhltable td.code{padding-left:.75em;padding-right:0}
+pre.pygments .lineno,table.pyhltable td:not(.code){color:#999;padding-left:0;padding-right:.5em;border-right:1px solid #ddddd8}
+pre.pygments .lineno{display:inline-block;margin-right:.25em}
+table.pyhltable .linenodiv{background:none!important;padding-right:0!important}
+.quoteblock{margin:0 1em 1.25em 1.5em;display:table}
+.quoteblock>.title{margin-left:-1.5em;margin-bottom:.75em}
+.quoteblock blockquote,.quoteblock blockquote p{color:rgba(0,0,0,.85);font-size:1.15rem;line-height:1.75;word-spacing:.1em;letter-spacing:0;font-style:italic;text-align:justify}
+.quoteblock blockquote{margin:0;padding:0;border:0}
+.quoteblock blockquote:before{content:"\201c";float:left;font-size:2.75em;font-weight:bold;line-height:.6em;margin-left:-.6em;color:#7a2518;text-shadow:0 1px 2px rgba(0,0,0,.1)}
+.quoteblock blockquote>.paragraph:last-child p{margin-bottom:0}
+.quoteblock .attribution{margin-top:.5em;margin-right:.5ex;text-align:right}
+.quoteblock .quoteblock{margin-left:0;margin-right:0;padding:.5em 0;border-left:3px solid rgba(0,0,0,.6)}
+.quoteblock .quoteblock blockquote{padding:0 0 0 .75em}
+.quoteblock .quoteblock blockquote:before{display:none}
+.verseblock{margin:0 1em 1.25em 1em}
+.verseblock pre{font-family:"Open Sans","DejaVu Sans",sans;font-size:1.15rem;color:rgba(0,0,0,.85);font-weight:300;text-rendering:optimizeLegibility}
+.verseblock pre strong{font-weight:400}
+.verseblock .attribution{margin-top:1.25rem;margin-left:.5ex}
+.quoteblock .attribution,.verseblock .attribution{font-size:.9375em;line-height:1.45;font-style:italic}
+.quoteblock .attribution br,.verseblock .attribution br{display:none}
+.quoteblock .attribution cite,.verseblock .attribution cite{display:block;letter-spacing:-.025em;color:rgba(0,0,0,.6)}
+.quoteblock.abstract{margin:0 0 1.25em 0;display:block}
+.quoteblock.abstract blockquote,.quoteblock.abstract blockquote p{text-align:left;word-spacing:0}
+.quoteblock.abstract blockquote:before,.quoteblock.abstract blockquote p:first-of-type:before{display:none}
+table.tableblock{max-width:100%;border-collapse:separate}
+table.tableblock td>.paragraph:last-child p>p:last-child,table.tableblock th>p:last-child,table.tableblock td>p:last-child{margin-bottom:0}
+table.tableblock,th.tableblock,td.tableblock{border:0 solid #dedede}
+table.grid-all th.tableblock,table.grid-all td.tableblock{border-width:0 1px 1px 0}
+table.grid-all tfoot>tr>th.tableblock,table.grid-all tfoot>tr>td.tableblock{border-width:1px 1px 0 0}
+table.grid-cols th.tableblock,table.grid-cols td.tableblock{border-width:0 1px 0 0}
+table.grid-all *>tr>.tableblock:last-child,table.grid-cols *>tr>.tableblock:last-child{border-right-width:0}
+table.grid-rows th.tableblock,table.grid-rows td.tableblock{border-width:0 0 1px 0}
+table.grid-all tbody>tr:last-child>th.tableblock,table.grid-all tbody>tr:last-child>td.tableblock,table.grid-all thead:last-child>tr>th.tableblock,table.grid-rows tbody>tr:last-child>th.tableblock,table.grid-rows tbody>tr:last-child>td.tableblock,table.grid-rows thead:last-child>tr>th.tableblock{border-bottom-width:0}
+table.grid-rows tfoot>tr>th.tableblock,table.grid-rows tfoot>tr>td.tableblock{border-width:1px 0 0 0}
+table.frame-all{border-width:1px}
+table.frame-sides{border-width:0 1px}
+table.frame-topbot{border-width:1px 0}
+th.halign-left,td.halign-left{text-align:left}
+th.halign-right,td.halign-right{text-align:right}
+th.halign-center,td.halign-center{text-align:center}
+th.valign-top,td.valign-top{vertical-align:top}
+th.valign-bottom,td.valign-bottom{vertical-align:bottom}
+th.valign-middle,td.valign-middle{vertical-align:middle}
+table thead th,table tfoot th{font-weight:bold}
+tbody tr th{display:table-cell;line-height:1.6;background:#f7f8f7}
+tbody tr th,tbody tr th p,tfoot tr th,tfoot tr th p{color:rgba(0,0,0,.8);font-weight:bold}
+p.tableblock>code:only-child{background:none;padding:0}
+p.tableblock{font-size:1em}
+td>div.verse{white-space:pre}
+ol{margin-left:1.75em}
+ul li ol{margin-left:1.5em}
+dl dd{margin-left:1.125em}
+dl dd:last-child,dl dd:last-child>:last-child{margin-bottom:0}
+ol>li p,ul>li p,ul dd,ol dd,.olist .olist,.ulist .ulist,.ulist .olist,.olist .ulist{margin-bottom:.625em}
+ul.unstyled,ol.unnumbered,ul.checklist,ul.none{list-style-type:none}
+ul.unstyled,ol.unnumbered,ul.checklist{margin-left:.625em}
+ul.checklist li>p:first-child>.fa-square-o:first-child,ul.checklist li>p:first-child>.fa-check-square-o:first-child{width:1em;font-size:.85em}
+ul.checklist li>p:first-child>input[type="checkbox"]:first-child{width:1em;position:relative;top:1px}
+ul.inline{margin:0 auto .625em auto;margin-left:-1.375em;margin-right:0;padding:0;list-style:none;overflow:hidden}
+ul.inline>li{list-style:none;float:left;margin-left:1.375em;display:block}
+ul.inline>li>*{display:block}
+.unstyled dl dt{font-weight:400;font-style:normal}
+ol.arabic{list-style-type:decimal}
+ol.decimal{list-style-type:decimal-leading-zero}
+ol.loweralpha{list-style-type:lower-alpha}
+ol.upperalpha{list-style-type:upper-alpha}
+ol.lowerroman{list-style-type:lower-roman}
+ol.upperroman{list-style-type:upper-roman}
+ol.lowergreek{list-style-type:lower-greek}
+.hdlist>table,.colist>table{border:0;background:none}
+.hdlist>table>tbody>tr,.colist>table>tbody>tr{background:none}
+td.hdlist1,td.hdlist2{vertical-align:top;padding:0 .625em}
+td.hdlist1{font-weight:bold;padding-bottom:1.25em}
+.literalblock+.colist,.listingblock+.colist{margin-top:-.5em}
+.colist>table tr>td:first-of-type{padding:0 .75em;line-height:1}
+.colist>table tr>td:last-of-type{padding:.25em 0}
+.thumb,.th{line-height:0;display:inline-block;border:solid 4px #fff;-webkit-box-shadow:0 0 0 1px #ddd;box-shadow:0 0 0 1px #ddd}
+.imageblock.left,.imageblock[style*="float: left"]{margin:.25em .625em 1.25em 0}
+.imageblock.right,.imageblock[style*="float: right"]{margin:.25em 0 1.25em .625em}
+.imageblock>.title{margin-bottom:0}
+.imageblock.thumb,.imageblock.th{border-width:6px}
+.imageblock.thumb>.title,.imageblock.th>.title{padding:0 .125em}
+.image.left,.image.right{margin-top:.25em;margin-bottom:.25em;display:inline-block;line-height:0}
+.image.left{margin-right:.625em}
+.image.right{margin-left:.625em}
+a.image{text-decoration:none;display:inline-block}
+a.image object{pointer-events:none}
+sup.footnote,sup.footnoteref{font-size:.875em;position:static;vertical-align:super}
+sup.footnote a,sup.footnoteref a{text-decoration:none}
+sup.footnote a:active,sup.footnoteref a:active{text-decoration:underline}
+#footnotes{padding-top:.75em;padding-bottom:.75em;margin-bottom:.625em}
+#footnotes hr{width:20%;min-width:6.25em;margin:-.25em 0 .75em 0;border-width:1px 0 0 0}
+#footnotes .footnote{padding:0 .375em 0 .225em;line-height:1.3334;font-size:.875em;margin-left:1.2em;text-indent:-1.05em;margin-bottom:.2em}
+#footnotes .footnote a:first-of-type{font-weight:bold;text-decoration:none}
+#footnotes .footnote:last-of-type{margin-bottom:0}
+#content #footnotes{margin-top:-.625em;margin-bottom:0;padding:.75em 0}
+.gist .file-data>table{border:0;background:#fff;width:100%;margin-bottom:0}
+.gist .file-data>table td.line-data{width:99%}
+div.unbreakable{page-break-inside:avoid}
+.big{font-size:larger}
+.small{font-size:smaller}
+.underline{text-decoration:underline}
+.overline{text-decoration:overline}
+.line-through{text-decoration:line-through}
+.aqua{color:#00bfbf}
+.aqua-background{background-color:#00fafa}
+.black{color:#000}
+.black-background{background-color:#000}
+.blue{color:#0000bf}
+.blue-background{background-color:#0000fa}
+.fuchsia{color:#bf00bf}
+.fuchsia-background{background-color:#fa00fa}
+.gray{color:#606060}
+.gray-background{background-color:#7d7d7d}
+.green{color:#006000}
+.green-background{background-color:#007d00}
+.lime{color:#00bf00}
+.lime-background{background-color:#00fa00}
+.maroon{color:#600000}
+.maroon-background{background-color:#7d0000}
+.navy{color:#000060}
+.navy-background{background-color:#00007d}
+.olive{color:#606000}
+.olive-background{background-color:#7d7d00}
+.purple{color:#600060}
+.purple-background{background-color:#7d007d}
+.red{color:#bf0000}
+.red-background{background-color:#fa0000}
+.silver{color:#909090}
+.silver-background{background-color:#bcbcbc}
+.teal{color:#006060}
+.teal-background{background-color:#007d7d}
+.white{color:#bfbfbf}
+.white-background{background-color:#fafafa}
+.yellow{color:#bfbf00}
+.yellow-background{background-color:#fafa00}
+span.icon>.fa{cursor:default}
+.admonitionblock td.icon [class^="fa icon-"]{font-size:2.5em;text-shadow:1px 1px 2px rgba(0,0,0,.5);cursor:default}
+.admonitionblock td.icon .icon-note:before{content:"\f05a";color:#19407c}
+.admonitionblock td.icon .icon-tip:before{content:"\f0eb";text-shadow:1px 1px 2px rgba(155,155,0,.8);color:#111}
+.admonitionblock td.icon .icon-warning:before{content:"\f071";color:#bf6900}
+.admonitionblock td.icon .icon-caution:before{content:"\f06d";color:#bf3400}
+.admonitionblock td.icon .icon-important:before{content:"\f06a";color:#bf0000}
+.conum[data-value]{display:inline-block;color:#fff!important;background-color:rgba(0,0,0,.8);-webkit-border-radius:100px;border-radius:100px;text-align:center;font-size:.75em;width:1.67em;height:1.67em;line-height:1.67em;font-family:"Open Sans","DejaVu Sans",sans-serif;font-style:normal;font-weight:bold}
+.conum[data-value] *{color:#fff!important}
+.conum[data-value]+b{display:none}
+.conum[data-value]:after{content:attr(data-value)}
+pre .conum[data-value]{position:relative;top:-.125em}
+b.conum *{color:inherit!important}
+.conum:not([data-value]):empty{display:none}
+dt,th.tableblock,td.content,div.footnote{text-rendering:optimizeLegibility}
+h1,h2,p,td.content,span.alt{letter-spacing:-.01em}
+p strong,td.content strong,div.footnote strong{letter-spacing:-.005em}
+p,blockquote,dt,td.content,span.alt{font-size:1.0625rem}
+p{margin-bottom:1.25rem}
+.sidebarblock p,.sidebarblock dt,.sidebarblock td.content,p.tableblock{font-size:1em}
+.exampleblock>.content{background-color:#fffef7;border-color:#e0e0dc;-webkit-box-shadow:0 1px 4px #e0e0dc;box-shadow:0 1px 4px #e0e0dc}
+.print-only{display:none!important}
+@media print{@page{margin:1.25cm .75cm}
+*{-webkit-box-shadow:none!important;box-shadow:none!important;text-shadow:none!important}
+a{color:inherit!important;text-decoration:underline!important}
+a.bare,a[href^="#"],a[href^="mailto:"]{text-decoration:none!important}
+a[href^="http:"]:not(.bare):after,a[href^="https:"]:not(.bare):after{content:"(" attr(href) ")";display:inline-block;font-size:.875em;padding-left:.25em}
+abbr[title]:after{content:" (" attr(title) ")"}
+pre,blockquote,tr,img,object,svg{page-break-inside:avoid}
+thead{display:table-header-group}
+svg{max-width:100%}
+p,blockquote,dt,td.content{font-size:1em;orphans:3;widows:3}
+h2,h3,#toctitle,.sidebarblock>.content>.title{page-break-after:avoid}
+#toc,.sidebarblock,.exampleblock>.content{background:none!important}
+#toc{border-bottom:1px solid #ddddd8!important;padding-bottom:0!important}
+.sect1{padding-bottom:0!important}
+.sect1+.sect1{border:0!important}
+#header>h1:first-child{margin-top:1.25rem}
+body.book #header{text-align:center}
+body.book #header>h1:first-child{border:0!important;margin:2.5em 0 1em 0}
+body.book #header .details{border:0!important;display:block;padding:0!important}
+body.book #header .details span:first-child{margin-left:0!important}
+body.book #header .details br{display:block}
+body.book #header .details br+span:before{content:none!important}
+body.book #toc{border:0!important;text-align:left!important;padding:0!important;margin:0!important}
+body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-break-before:always}
+.listingblock code[data-lang]:before{display:block}
+#footer{background:none!important;padding:0 .9375em}
+#footer-text{color:rgba(0,0,0,.6)!important;font-size:.9em}
+.hide-on-print{display:none!important}
+.print-only{display:block!important}
+.hide-for-print{display:none!important}
+.show-for-print{display:inherit!important}}
+</style>
+<style>
+.listingblock .pygments .hll { background-color: #ffffcc }
+.listingblock .pygments, .listingblock .pygments code { background: #f8f8f8; }
+.listingblock .pygments .tok-c { color: #408080; font-style: italic } /* Comment */
+.listingblock .pygments .tok-err { border: 1px solid #FF0000 } /* Error */
+.listingblock .pygments .tok-k { color: #008000; font-weight: bold } /* Keyword */
+.listingblock .pygments .tok-o { color: #666666 } /* Operator */
+.listingblock .pygments .tok-ch { color: #408080; font-style: italic } /* Comment.Hashbang */
+.listingblock .pygments .tok-cm { color: #408080; font-style: italic } /* Comment.Multiline */
+.listingblock .pygments .tok-cp { color: #BC7A00 } /* Comment.Preproc */
+.listingblock .pygments .tok-cpf { color: #408080; font-style: italic } /* Comment.PreprocFile */
+.listingblock .pygments .tok-c1 { color: #408080; font-style: italic } /* Comment.Single */
+.listingblock .pygments .tok-cs { color: #408080; font-style: italic } /* Comment.Special */
+.listingblock .pygments .tok-gd { color: #A00000 } /* Generic.Deleted */
+.listingblock .pygments .tok-ge { font-style: italic } /* Generic.Emph */
+.listingblock .pygments .tok-gr { color: #FF0000 } /* Generic.Error */
+.listingblock .pygments .tok-gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.listingblock .pygments .tok-gi { color: #00A000 } /* Generic.Inserted */
+.listingblock .pygments .tok-go { color: #888888 } /* Generic.Output */
+.listingblock .pygments .tok-gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.listingblock .pygments .tok-gs { font-weight: bold } /* Generic.Strong */
+.listingblock .pygments .tok-gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.listingblock .pygments .tok-gt { color: #0044DD } /* Generic.Traceback */
+.listingblock .pygments .tok-kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.listingblock .pygments .tok-kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.listingblock .pygments .tok-kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.listingblock .pygments .tok-kp { color: #008000 } /* Keyword.Pseudo */
+.listingblock .pygments .tok-kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.listingblock .pygments .tok-kt { color: #B00040 } /* Keyword.Type */
+.listingblock .pygments .tok-m { color: #666666 } /* Literal.Number */
+.listingblock .pygments .tok-s { color: #BA2121 } /* Literal.String */
+.listingblock .pygments .tok-na { color: #7D9029 } /* Name.Attribute */
+.listingblock .pygments .tok-nb { color: #008000 } /* Name.Builtin */
+.listingblock .pygments .tok-nc { color: #0000FF; font-weight: bold } /* Name.Class */
+.listingblock .pygments .tok-no { color: #880000 } /* Name.Constant */
+.listingblock .pygments .tok-nd { color: #AA22FF } /* Name.Decorator */
+.listingblock .pygments .tok-ni { color: #999999; font-weight: bold } /* Name.Entity */
+.listingblock .pygments .tok-ne { color: #D2413A; font-weight: bold } /* Name.Exception */
+.listingblock .pygments .tok-nf { color: #0000FF } /* Name.Function */
+.listingblock .pygments .tok-nl { color: #A0A000 } /* Name.Label */
+.listingblock .pygments .tok-nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
+.listingblock .pygments .tok-nt { color: #008000; font-weight: bold } /* Name.Tag */
+.listingblock .pygments .tok-nv { color: #19177C } /* Name.Variable */
+.listingblock .pygments .tok-ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
+.listingblock .pygments .tok-w { color: #bbbbbb } /* Text.Whitespace */
+.listingblock .pygments .tok-mb { color: #666666 } /* Literal.Number.Bin */
+.listingblock .pygments .tok-mf { color: #666666 } /* Literal.Number.Float */
+.listingblock .pygments .tok-mh { color: #666666 } /* Literal.Number.Hex */
+.listingblock .pygments .tok-mi { color: #666666 } /* Literal.Number.Integer */
+.listingblock .pygments .tok-mo { color: #666666 } /* Literal.Number.Oct */
+.listingblock .pygments .tok-sa { color: #BA2121 } /* Literal.String.Affix */
+.listingblock .pygments .tok-sb { color: #BA2121 } /* Literal.String.Backtick */
+.listingblock .pygments .tok-sc { color: #BA2121 } /* Literal.String.Char */
+.listingblock .pygments .tok-dl { color: #BA2121 } /* Literal.String.Delimiter */
+.listingblock .pygments .tok-sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+.listingblock .pygments .tok-s2 { color: #BA2121 } /* Literal.String.Double */
+.listingblock .pygments .tok-se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
+.listingblock .pygments .tok-sh { color: #BA2121 } /* Literal.String.Heredoc */
+.listingblock .pygments .tok-si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
+.listingblock .pygments .tok-sx { color: #008000 } /* Literal.String.Other */
+.listingblock .pygments .tok-sr { color: #BB6688 } /* Literal.String.Regex */
+.listingblock .pygments .tok-s1 { color: #BA2121 } /* Literal.String.Single */
+.listingblock .pygments .tok-ss { color: #19177C } /* Literal.String.Symbol */
+.listingblock .pygments .tok-bp { color: #008000 } /* Name.Builtin.Pseudo */
+.listingblock .pygments .tok-fm { color: #0000FF } /* Name.Function.Magic */
+.listingblock .pygments .tok-vc { color: #19177C } /* Name.Variable.Class */
+.listingblock .pygments .tok-vg { color: #19177C } /* Name.Variable.Global */
+.listingblock .pygments .tok-vi { color: #19177C } /* Name.Variable.Instance */
+.listingblock .pygments .tok-vm { color: #19177C } /* Name.Variable.Magic */
+.listingblock .pygments .tok-il { color: #666666 } /* Literal.Number.Integer.Long */
+</style>
+</head>
+<body class="article">
+<div id="header">
+<h1>Reactive Coding Workshop with Spring Boot: Lab docs</h1>
+<div class="details">
+<span id="author" class="author">Mark Paluch</span><br>
+<span id="email" class="email"><a href="mailto:mpaluch@pivotal.io">mpaluch@pivotal.io</a></span><br>
+<span id="author2" class="author">Simon Baslé</span><br>
+<span id="email2" class="email"><a href="mailto:sbasle@pivotal.io">sbasle@pivotal.io</a></span><br>
+<span id="revnumber">version 1.0</span>
+</div>
+</div>
+<div id="content">
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>&#169; 2017 The original authors.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+<em>Copies of this document may be made for your own use and for distribution to others, provided that you do not charge any fee for such copies and further provided that each copy contains this Copyright Notice, whether distributed in print or electronically.</em>
+</td>
+</tr>
+</table>
+</div>
+<div id="toc" class="toc">
+<div id="toctitle" class="title">Table of Contents</div>
+<ul class="sectlevel1">
+<li><a href="#_lab_setup">1. Lab Setup</a>
+<ul class="sectlevel2">
+<li><a href="#_prerequisites">1.1. Prerequisites</a></li>
+<li><a href="#_register_a_github_account_optional_recommended">1.2. Register a GitHub account (Optional, recommended)</a></li>
+<li><a href="#_clone_the_git_repository">1.3. Clone the Git repository</a></li>
+<li><a href="#_ide_import">1.4. IDE Import</a></li>
+<li><a href="#_eclipse_or_sts_2">1.5. Eclipse or STS </a></li>
+<li><a href="#_intellij_idea_2">1.6. IntelliJ IDEA </a></li>
+</ul>
+</li>
+<li><a href="#_runnable_application">2. Runnable Application</a></li>
+<li><a href="#_get_comfortable_with_the_code">3. Get Comfortable with the Code</a></li>
+<li><a href="#_first_steps_with_code_mono_code_and_code_flux_code">4. First Steps with <code>Mono</code> and <code>Flux</code></a></li>
+<li><a href="#reactive-data-access">5. Reactive Data Access</a></li>
+<li><a href="#_reactive_computations">6. Reactive Computations</a></li>
+<li><a href="#miner-detail-page">7. Miner Detail Page</a></li>
+<li><a href="#_bonus">Bonus</a>
+<ul class="sectlevel1">
+<li><a href="#_rank_on_miner_detail_page">1. Rank on Miner Detail Page</a></li>
+<li><a href="#_reactive_micro_proxy">2. Reactive Micro-Proxy</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_lab_setup">1. Lab Setup</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_prerequisites">1.1. Prerequisites</h3>
+<div class="paragraph">
+<p>You need an installed JDK, at least Java 8. If you use <a href="https://git-scm.com/">Git</a>, then you can checkout the Code using Git. You can also download the <a href="https://github.com/mp911de/reactive-coding-workshop/archive/master.zip">initial code</a> or <a href="https://github.com/mp911de/reactive-coding-workshop/archive/complete.zip">complete code</a> directly.</p>
+</div>
+<div class="paragraph">
+<p>An installed IDE is recommended but not necessary. Having <code>cURL</code>, a browser or, any other sophisticated HTTP client installed is beneficial for issuing HTTP requests.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_register_a_github_account_optional_recommended">1.2. Register a GitHub account (Optional, recommended)</h3>
+<div class="paragraph">
+<p>Go to <a href="https://github.com" class="bare">https://github.com</a> and signup for a free account. If you already have a GitHub account, you can skip this step.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_clone_the_git_repository">1.3. Clone the Git repository</h3>
+<div class="paragraph">
+<p>Clone the Reactive Coding Workshop with Spring Boot project using Git.</p>
+</div>
+<div class="sect3">
+<h4 id="_console">Console</h4>
+<div class="paragraph">
+<p>Open a console and type the following command to clone the project:</p>
+</div>
+<div class="exampleblock">
+<div class="title">Example 1. Cloning the Code Repository</div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="shell">$ git clone https://github.com/mp911de/reactive-coding-workshop.git</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_eclipse_or_sts">Eclipse or STS </h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>From the project explorer, right click, <code>Import</code>, <code>Git</code>, <code>Projects from Git</code>.</p>
+</li>
+<li>
+<p>Select <code>Clone URI</code> and click <code>Next</code>.</p>
+</li>
+<li>
+<p>Enter the URI <a href="https://github.com/mp911de/reactive-coding-workshop.git" class="bare">https://github.com/mp911de/reactive-coding-workshop.git</a> and click <code>Next</code>.</p>
+</li>
+<li>
+<p>Select the master branch and click <code>Next</code> The projects will be imported.</p>
+</li>
+</ol>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+Note that depending on the version of Eclipse / STS, your version of Java, and other factors, you may encounter errors. These will need to be fixed on a case-by-case basis before proceeding.  
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_intellij_idea">IntelliJ IDEA </h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>From the menu bar <code>VCS</code>, select <code>Checkout from Version Control</code>, <code>Github</code>.</p>
+</li>
+<li>
+<p>Enter the URI <a href="https://github.com/mp911de/reactive-coding-workshop.git" class="bare">https://github.com/mp911de/reactive-coding-workshop.git</a> and click <code>Clone</code>.</p>
+</li>
+<li>
+<p>The repository will be cloned.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_ide_import">1.4. IDE Import</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_eclipse_or_sts_2">1.5. Eclipse or STS </h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>From the project explorer, right click, <code>Import</code>, <code>Maven</code>, <code>Existing Maven Projects</code>.</p>
+</li>
+<li>
+<p>Navigate to the folder where you cloned the repository and <code>Finish</code>.</p>
+</li>
+<li>
+<p>The projects will be imported.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Eclipse users wanting to use <a href="http://projectlombok.org">Lombok</a> need to install the Eclipse/Lombok plugin.
+Run <code>lombok.jar</code> as a java app (i.e. double-click it, usually) to install. Also, add <code>lombok.jar</code> to your project. Supported variants: SpringSource Tool Suite, JBoss Developer Studio</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+Note that depending on the version of Eclipse / STS, your version of Java, and other factors, you may encounter errors. These will need to be fixed on a case-by-case basis before proceeding. 
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_intellij_idea_2">1.6. IntelliJ IDEA </h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>From the <code>File</code> menu select <code>Import Project</code> and navigate to wherever the course labs were installed during the previous step. </p>
+</li>
+<li>
+<p>Click <code>Import project from external model</code> and import as Maven projects. </p>
+</li>
+<li>
+<p>After clicking <code>Next</code>, select the <code>Search for projects recursively</code> checkbox. </p>
+</li>
+<li>
+<p>Click <code>Next</code> again and several projects should be listed. </p>
+</li>
+<li>
+<p>Click <code>Next</code> and select a suitable SDK. </p>
+</li>
+<li>
+<p>Click <code>Next</code> one last time. You can leave the project name and location. Click Finish. </p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>IntelliJ IDEA users wanting to use <a href="http://projectlombok.org">Lombok</a> need to install the Eclipse/Lombok plugin.
+A <a href="https://plugins.jetbrains.com/plugin/6317?pr=idea">plugin developed by Michael Plushnikov</a> adds support for most features.</p>
+</div>
+<div class="paragraph">
+<p>Congratulations! You have setup everything you will need for the rest of the course. The hard part is over!</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_runnable_application">2. Runnable Application</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>About this Lab</strong></p>
+</div>
+<div class="paragraph">
+<p>You will learn how to start a reactive Spring Boot application</p>
+</div>
+<div class="paragraph">
+<p><strong>Prerequisites</strong></p>
+</div>
+<div class="paragraph">
+<p>To complete these steps, you will need:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>The code checked out.</p>
+</li>
+<li>
+<p>Optional: The code imported into your IDE.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Estimated Duration</strong></p>
+</div>
+<div class="paragraph">
+<p><em>5 minutes</em></p>
+</div>
+<div class="paragraph">
+<p><strong>Steps</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>The project contains a runnable application.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>IDE: Navigate to the main class <code>ReactiveCodingWorkshopApplication</code>. Run this main class. The application will boot up and start a web server on port <code>8080</code>. </p>
+</li>
+<li>
+<p>Maven users: Open a console and navigate to the code directory. Run <code>./mvnw spring-boot:run</code></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Navigate in your browser to the following endpoint:  <a href="http://localhost:8080/" class="bare">http://localhost:8080/</a></p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>You should see something like:</p>
+</div>
+<div class="imageblock thumb">
+<div class="content">
+<img src="images/initial-site.png" alt="initial site" width="640">
+</div>
+<div class="title">Figure 1. Initial View</div>
+</div>
+<div class="paragraph">
+<p>When you are done, stop the application.</p>
+</div>
+<div class="paragraph">
+<p>Congratulations, you have finished this exercise.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_get_comfortable_with_the_code">3. Get Comfortable with the Code</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>About this Lab</strong></p>
+</div>
+<div class="paragraph">
+<p>You will walk through the code to get familiar with the individual bits.</p>
+</div>
+<div class="paragraph">
+<p><strong>Prerequisites</strong></p>
+</div>
+<div class="paragraph">
+<p>To complete these steps, you will need:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>The code checked out.</p>
+</li>
+<li>
+<p>Optional: The code imported into your IDE.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Estimated Duration</strong></p>
+</div>
+<div class="paragraph">
+<p><em>15 minutes</em></p>
+</div>
+<div class="paragraph">
+<p><strong>Steps</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Go to the package <code>org.dogepool.reactiveboot.config</code>. It contains the configuration classes to provide properties to the application and <code>WebConfig</code> to configure <a href="http://freemarker.org/">FreeMarker</a> for view template resolution.</p>
+</li>
+<li>
+<p>Go to the package <code>org.dogepool.reactiveboot.domain</code>. This package contains the domain model: <code>UserStat</code> and <code>User</code> with an embedded <code>UserProfile</code>. <code>UserStat</code> and <code>User</code> are aggregate roots. <code>UserStatRepository</code> and <code>UserRepository</code> interact with the domain objects.</p>
+</li>
+<li>
+<p><code>org.dogepool.reactiveboot.view.model</code> contains <code>MinerModel</code> that is used to populate the view.</p>
+</li>
+<li>
+<p>Now, go to <code>org.dogepool.reactiveboot.controller</code>. This package contains the controller classes that are exposed by Spring WebFlux as reactive HTTP endpoints.</p>
+</li>
+<li>
+<p>Take a look at <code>org.dogepool.reactiveboot</code>. You will notice <code>DataInitializer</code>. Why is this class using <code>MongoTemplate</code>? I thought the workshop title said reactive coding? You&#8217;re right! This class uses a blocking <code>MongoTemplate</code> inside a <code>@PostConstruct</code> method to load data into MongoDB. This code happens during initialization and there&#8217;s not need to go async. As of now, you should not use reactive infrastructure because that performs work on other threads than the main thread while we&#8217;re still in the initialization phase. Initialization means that Spring Framework holds some exclusive object locks that may cause locks which do not resolve (similar to a deadlock) therefore the only safe approach is using plain old blocking I/O. MongoDB is started as embedded process. And to be honest: You don&#8217;t want to mess with reactive synchronization.</p>
+</li>
+</ol>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+Repositories are implemented by Spring Data MongoDB. Domain classes use <a href="http://projectlombok.org">Lombok</a> annotations to get rid of boilerplate code. Getter/Setter/Constructors and more are generated during runtime by the annotation processor.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+Did you notice that <code>src/test/java</code> contains a bunch of JUnit tests? These tests will guide you in the next steps towards the implementation and help to verify whether your implementation is correct. Don&#8217;t worry, at this stage, the tests do not pass.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Congratulations, you have finished this exercise.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_first_steps_with_code_mono_code_and_code_flux_code">4. First Steps with <code>Mono</code> and <code>Flux</code></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>About this Lab</strong></p>
+</div>
+<div class="paragraph">
+<p>You will learn about <code>Mono</code> and <code>Flux</code> and their role as elementary reactive types. You will see how to create instances, compose a reactive sequence by applying operators and how to consume data.</p>
+</div>
+<div class="paragraph">
+<p><strong>Prerequisites</strong></p>
+</div>
+<div class="paragraph">
+<p>To complete these steps, you will need:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>The code checked out.</p>
+</li>
+<li>
+<p>The code imported into your IDE.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Estimated Duration</strong></p>
+</div>
+<div class="paragraph">
+<p><em>25 minutes</em></p>
+</div>
+<div class="paragraph">
+<p><code>Mono</code> and <code>Flux</code> are reactive types that emit <code>0..1</code> values and <code>0..1..N</code> values, respectively. They can be created as scalar values to just emit the provided value, from a <code>Callable</code> or as generator to provide a sink for processes that publish data to a target.</p>
+</div>
+<div class="paragraph">
+<p><strong>Steps</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Go to <code>src/test/java</code> <code>org.dogepool.reactiveboot.GettingStartedTests</code>. There you find a couple of methods with <code>TODO</code> comments. Read each method&#8217;s TODO description and solve the tasks.</p>
+</li>
+<li>
+<p><code>monoShouldCreateScalarValue</code>: Scalar <code>Mono</code> instances are created with the <code>Mono.just(…)</code> factory method. Replace <code>Mono.empty()</code> with <code>Mono.just("Hello, World")</code>.</p>
+</li>
+<li>
+<p><code>monoShouldMapValueToHelloWorld</code>: Values can be mapped using the <code>map</code> operators. Map the emitted value <code>Hello</code> to <code>Hello, World</code> using <code>mono = mono.map(s &#8594; String.format("%s, World", s));</code>.</p>
+</li>
+<li>
+<p><code>monoShouldFlatMapValueToHelloWorld</code>: <code>map</code> is perfect to map a non-null value into another non-null value calling code that is likely not to block. However, some cases require further I/O or can lead to absence of values, or, the emission of many values. <code>Mono.then(…)</code> is the flap-map operator for this case. Apply it with <code>mono.then(s &#8594; Mono.just(String.format("%s, World", s)));</code>.</p>
+</li>
+<li>
+<p><code>monoShouldDeferCallable</code>: You can create a <code>Mono</code> from a <code>Callable</code> to obtain a value applying reactive execution. Create a <code>Mono</code> from a <code>Callable</code> with <code>Mono.fromCallable(myValue)</code>.
+A <code>Mono</code> can be created from other sources, like the first element in an <code>Iterable</code>, other <code>Mono</code>s, a <code>Supplier</code>, a <code>CompletableFuture</code> and many more.</p>
+</li>
+<li>
+<p><code>monoShouldExecuteOnADifferentThread</code>: Until now, all operations ran on the same thread. <code>.subscribe()</code> on each invocation subscribed to the <code>Mono</code> and initiated execution. Because it&#8217;s the same thread, you didn&#8217;t run into background execution. Use a <code>Scheduler</code> to subscribe and publish elements on a different thread with ` mono.subscribeOn(elastic).publishOn(elastic)`.</p>
+</li>
+<li>
+<p>It&#8217;s likely that you don&#8217;t see any output at all. This is, because subscription and execution are now separate threads. You don&#8217;t await execution. You can block the calling thread to synchronize the result by appending <code>.block()</code> to <code>.subscribe()</code>. The method will wait up to 30 seconds for the result. Calling <code>.block</code> is a last resort if no other synchronization is possible. In general, avoid <code>.block()</code> because calling <code>.block()</code> in a code block that should be non-blocking, will enforce blocking whereas your intention in non-blocking programming is not to block non-blocking execution.</p>
+</li>
+<li>
+<p><code>fluxShouldCreateScalarValues</code>: Let&#8217;s look at <code>Flux</code>. <code>Flux</code> is the type to emit multiple elements. Create a scalar <code>Flux</code> that emits <code>Hello</code> and <code>World</code> items with the <code>Flux.just(…)</code> factory method. Replace <code>Flux.empty()</code> with <code>Flux.just("Hello", "World")</code>.</p>
+</li>
+<li>
+<p><code>fluxShouldCreateHelloWorldFromIterable</code>: You can create <code>Flux</code> from various sources. A handy approach to use resolved <code>Iterable</code>s of data (such as a <code>List</code> or <code>Set</code>) in a reactive flow is creating a <code>Flux</code> from an <code>Iterable</code> with <code>Flux.fromIterable(…)</code>. Replace <code>Flux.empty()</code> with <code>Flux.fromIterable(strings)</code>.</p>
+</li>
+<li>
+<p><code>fluxShouldConcatTwoMonos</code>: A common scenario in reactive programming is combination of multiple reactive types without enforcing synchronization. This step provides two <code>Mono</code>s (which are a <code>Publisher</code> each) and they should be concatenated. Concat retains the order in which the <code>Publisher</code> emits its values. Use the <code>Flux.concat(…)</code> factory method by invoking <code>Flux.concat(hello, world)</code>. Another approach is using the <code>merge</code> operator. Emitted items from a <code>Publisher</code> merged with <code>.merge(…)</code> may interleave with other items.</p>
+</li>
+<li>
+<p><code>monoShouldEmitIndividualCharactersAsString</code>: A reactive sequence converts emitted elements by using <code>map</code> operator. A single element is accepted and a single converted (mapped) element is emitted – one in, one out. You might run into a scenario in which you require emission of many elements of one input element. Just think of accessing a data source. Accessing data can return multiple objects based on the query. For this case, apply the <code>flatMap</code> operator. The function applied with <code>flatMap</code> takes the original string and should emit each letter as <code>String</code>. You can use a neat reg-ex trick: <code>Flux.fromArray(s.split("|")</code>. So replace <code>Flux.empty()</code> with <code>mono.flatMap(s &#8594; Flux.fromArray(s.split("")))</code>. Alternatively, did you know about the char stream from <code>String</code>? You can use it with <code>Flux.fromStream(s.chars().mapToObj(value &#8594; String.valueOfchar) value)</code>.</p>
+</li>
+</ol>
+</div>
+<div style="page-break-after: always;"></div>
+<div class="paragraph">
+<p>Your code could look like:</p>
+</div>
+<div class="exampleblock">
+<div class="title">Example 2. GettingStartedTests.java</div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="java"><span class="tok-kd">public</span> <span class="tok-kd">class</span> <span class="tok-nc">GettingStartedTests</span> <span class="tok-o">{</span>
+
+	<span class="tok-nd">@Test</span>
+	<span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">monoShouldCreateScalarValue</span><span class="tok-o">()</span> <span class="tok-o">{</span>
+
+		<span class="tok-n">Mono</span><span class="tok-o">&lt;</span><span class="tok-n">String</span><span class="tok-o">&gt;</span> <span class="tok-n">mono</span> <span class="tok-o">=</span> <span class="tok-n">Mono</span><span class="tok-o">.</span><span class="tok-na">just</span><span class="tok-o">(</span><span class="tok-s">&quot;Hello, World&quot;</span><span class="tok-o">);</span>
+
+		<span class="tok-n">mono</span><span class="tok-o">.</span><span class="tok-na">subscribe</span><span class="tok-o">(</span><span class="tok-n">s</span> <span class="tok-o">-&gt;</span> <span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">.</span><span class="tok-na">println</span><span class="tok-o">(</span><span class="tok-n">s</span><span class="tok-o">));</span>
+	<span class="tok-o">}</span>
+
+	<span class="tok-nd">@Test</span>
+	<span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">monoShouldMapValueToHelloWorld</span><span class="tok-o">()</span> <span class="tok-o">{</span>
+
+		<span class="tok-n">Mono</span><span class="tok-o">&lt;</span><span class="tok-n">String</span><span class="tok-o">&gt;</span> <span class="tok-n">mono</span> <span class="tok-o">=</span> <span class="tok-n">Mono</span><span class="tok-o">.</span><span class="tok-na">just</span><span class="tok-o">(</span><span class="tok-s">&quot;Hello&quot;</span><span class="tok-o">);</span>
+
+		<span class="tok-n">mono</span> <span class="tok-o">=</span> <span class="tok-n">mono</span><span class="tok-o">.</span><span class="tok-na">map</span><span class="tok-o">(</span><span class="tok-n">s</span> <span class="tok-o">-&gt;</span> <span class="tok-n">String</span><span class="tok-o">.</span><span class="tok-na">format</span><span class="tok-o">(</span><span class="tok-s">&quot;%s, World&quot;</span><span class="tok-o">,</span> <span class="tok-n">s</span><span class="tok-o">));</span>
+
+		<span class="tok-n">mono</span><span class="tok-o">.</span><span class="tok-na">subscribe</span><span class="tok-o">(</span><span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">::</span><span class="tok-n">println</span><span class="tok-o">);</span>
+	<span class="tok-o">}</span>
+
+	<span class="tok-nd">@Test</span>
+	<span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">monoShouldFlatMapValueToHelloWorld</span><span class="tok-o">()</span> <span class="tok-o">{</span>
+
+		<span class="tok-n">Mono</span><span class="tok-o">&lt;</span><span class="tok-n">String</span><span class="tok-o">&gt;</span> <span class="tok-n">mono</span> <span class="tok-o">=</span> <span class="tok-n">Mono</span><span class="tok-o">.</span><span class="tok-na">just</span><span class="tok-o">(</span><span class="tok-s">&quot;Hello&quot;</span><span class="tok-o">);</span>
+
+		<span class="tok-n">mono</span> <span class="tok-o">=</span> <span class="tok-n">mono</span><span class="tok-o">.</span><span class="tok-na">then</span><span class="tok-o">(</span><span class="tok-n">s</span> <span class="tok-o">-&gt;</span> <span class="tok-n">Mono</span><span class="tok-o">.</span><span class="tok-na">just</span><span class="tok-o">(</span><span class="tok-n">String</span><span class="tok-o">.</span><span class="tok-na">format</span><span class="tok-o">(</span><span class="tok-s">&quot;%s, World&quot;</span><span class="tok-o">,</span> <span class="tok-n">s</span><span class="tok-o">)));</span>
+
+		<span class="tok-n">mono</span><span class="tok-o">.</span><span class="tok-na">subscribe</span><span class="tok-o">(</span><span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">::</span><span class="tok-n">println</span><span class="tok-o">);</span>
+	<span class="tok-o">}</span>
+
+	<span class="tok-nd">@Test</span>
+	<span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">monoShouldDeferCallable</span><span class="tok-o">()</span> <span class="tok-o">{</span>
+
+		<span class="tok-n">Callable</span><span class="tok-o">&lt;</span><span class="tok-n">String</span><span class="tok-o">&gt;</span> <span class="tok-n">myValue</span> <span class="tok-o">=</span> <span class="tok-o">()</span> <span class="tok-o">-&gt;</span> <span class="tok-s">&quot;Hello, World&quot;</span><span class="tok-o">;</span>
+
+		<span class="tok-n">Mono</span><span class="tok-o">&lt;</span><span class="tok-n">String</span><span class="tok-o">&gt;</span> <span class="tok-n">mono</span> <span class="tok-o">=</span> <span class="tok-n">Mono</span><span class="tok-o">.</span><span class="tok-na">fromCallable</span><span class="tok-o">(</span><span class="tok-n">myValue</span><span class="tok-o">);</span>
+
+		<span class="tok-n">mono</span><span class="tok-o">.</span><span class="tok-na">subscribe</span><span class="tok-o">(</span><span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">::</span><span class="tok-n">println</span><span class="tok-o">);</span>
+	<span class="tok-o">}</span>
+
+	<span class="tok-nd">@Test</span>
+	<span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">monoShouldExecuteOnADifferentThread</span><span class="tok-o">()</span> <span class="tok-o">{</span>
+
+		<span class="tok-n">Scheduler</span> <span class="tok-n">elastic</span> <span class="tok-o">=</span> <span class="tok-n">Schedulers</span><span class="tok-o">.</span><span class="tok-na">elastic</span><span class="tok-o">();</span>
+
+		<span class="tok-n">Mono</span><span class="tok-o">&lt;</span><span class="tok-n">String</span><span class="tok-o">&gt;</span> <span class="tok-n">mono</span> <span class="tok-o">=</span> <span class="tok-n">Mono</span><span class="tok-o">.</span><span class="tok-na">just</span><span class="tok-o">(</span><span class="tok-s">&quot;Hello, World&quot;</span><span class="tok-o">);</span>
+
+		<span class="tok-n">mono</span> <span class="tok-o">=</span> <span class="tok-n">mono</span><span class="tok-o">.</span><span class="tok-na">subscribeOn</span><span class="tok-o">(</span><span class="tok-n">elastic</span><span class="tok-o">).</span><span class="tok-na">publishOn</span><span class="tok-o">(</span><span class="tok-n">elastic</span><span class="tok-o">);</span>
+
+		<span class="tok-n">mono</span><span class="tok-o">.</span><span class="tok-na">doOnNext</span><span class="tok-o">(</span><span class="tok-n">s</span> <span class="tok-o">-&gt;</span> <span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">.</span><span class="tok-na">println</span><span class="tok-o">(</span><span class="tok-n">s</span><span class="tok-o">)).</span><span class="tok-na">subscribe</span><span class="tok-o">().</span><span class="tok-na">block</span><span class="tok-o">();</span>
+	<span class="tok-o">}</span>
+
+	<span class="tok-nd">@Test</span>
+	<span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">fluxShouldCreateScalarValues</span><span class="tok-o">()</span> <span class="tok-o">{</span>
+
+		<span class="tok-n">Flux</span><span class="tok-o">&lt;</span><span class="tok-n">String</span><span class="tok-o">&gt;</span> <span class="tok-n">flux</span> <span class="tok-o">=</span> <span class="tok-n">Flux</span><span class="tok-o">.</span><span class="tok-na">just</span><span class="tok-o">(</span><span class="tok-s">&quot;Hello&quot;</span><span class="tok-o">,</span> <span class="tok-s">&quot;World&quot;</span><span class="tok-o">);</span>
+
+		<span class="tok-n">flux</span><span class="tok-o">.</span><span class="tok-na">subscribe</span><span class="tok-o">(</span><span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">::</span><span class="tok-n">println</span><span class="tok-o">);</span>
+	<span class="tok-o">}</span>
+
+	<span class="tok-nd">@Test</span>
+	<span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">fluxShouldCreateHelloWorldFromIterable</span><span class="tok-o">()</span> <span class="tok-o">{</span>
+
+		<span class="tok-n">List</span><span class="tok-o">&lt;</span><span class="tok-n">String</span><span class="tok-o">&gt;</span> <span class="tok-n">strings</span> <span class="tok-o">=</span> <span class="tok-n">Arrays</span><span class="tok-o">.</span><span class="tok-na">asList</span><span class="tok-o">(</span><span class="tok-s">&quot;Hello&quot;</span><span class="tok-o">,</span> <span class="tok-s">&quot;World&quot;</span><span class="tok-o">);</span>
+
+		<span class="tok-n">Flux</span><span class="tok-o">&lt;</span><span class="tok-n">String</span><span class="tok-o">&gt;</span> <span class="tok-n">flux</span> <span class="tok-o">=</span> <span class="tok-n">Flux</span><span class="tok-o">.</span><span class="tok-na">fromIterable</span><span class="tok-o">(</span><span class="tok-n">strings</span><span class="tok-o">);</span>
+
+		<span class="tok-n">flux</span><span class="tok-o">.</span><span class="tok-na">subscribe</span><span class="tok-o">(</span><span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">::</span><span class="tok-n">println</span><span class="tok-o">);</span>
+	<span class="tok-o">}</span>
+
+	<span class="tok-nd">@Test</span>
+	<span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">fluxShouldConcatTwoMonos</span><span class="tok-o">()</span> <span class="tok-o">{</span>
+
+		<span class="tok-n">Mono</span><span class="tok-o">&lt;</span><span class="tok-n">String</span><span class="tok-o">&gt;</span> <span class="tok-n">hello</span> <span class="tok-o">=</span> <span class="tok-n">Mono</span><span class="tok-o">.</span><span class="tok-na">just</span><span class="tok-o">(</span><span class="tok-s">&quot;Hello&quot;</span><span class="tok-o">);</span>
+		<span class="tok-n">Mono</span><span class="tok-o">&lt;</span><span class="tok-n">String</span><span class="tok-o">&gt;</span> <span class="tok-n">world</span> <span class="tok-o">=</span> <span class="tok-n">Mono</span><span class="tok-o">.</span><span class="tok-na">just</span><span class="tok-o">(</span><span class="tok-s">&quot;World&quot;</span><span class="tok-o">);</span>
+
+		<span class="tok-n">Flux</span><span class="tok-o">&lt;</span><span class="tok-n">String</span><span class="tok-o">&gt;</span> <span class="tok-n">flux</span> <span class="tok-o">=</span> <span class="tok-n">Flux</span><span class="tok-o">.</span><span class="tok-na">concat</span><span class="tok-o">(</span><span class="tok-n">hello</span><span class="tok-o">,</span> <span class="tok-n">world</span><span class="tok-o">);</span>
+
+		<span class="tok-n">flux</span><span class="tok-o">.</span><span class="tok-na">subscribe</span><span class="tok-o">(</span><span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">::</span><span class="tok-n">println</span><span class="tok-o">);</span>
+	<span class="tok-o">}</span>
+
+	<span class="tok-nd">@Test</span>
+	<span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">monoShouldEmitIndividualCharactersAsString</span><span class="tok-o">()</span> <span class="tok-o">{</span>
+
+		<span class="tok-n">Mono</span><span class="tok-o">&lt;</span><span class="tok-n">String</span><span class="tok-o">&gt;</span> <span class="tok-n">mono</span> <span class="tok-o">=</span> <span class="tok-n">Mono</span><span class="tok-o">.</span><span class="tok-na">just</span><span class="tok-o">(</span><span class="tok-s">&quot;Hello, World&quot;</span><span class="tok-o">);</span>
+
+		<span class="tok-n">Flux</span><span class="tok-o">&lt;</span><span class="tok-n">String</span><span class="tok-o">&gt;</span> <span class="tok-n">flux</span> <span class="tok-o">=</span> <span class="tok-n">mono</span><span class="tok-o">.</span><span class="tok-na">map</span><span class="tok-o">(</span><span class="tok-n">s</span> <span class="tok-o">-&gt;</span> <span class="tok-n">s</span><span class="tok-o">.</span><span class="tok-na">split</span><span class="tok-o">(</span><span class="tok-s">&quot;&quot;</span><span class="tok-o">)).</span><span class="tok-na">flatMap</span><span class="tok-o">(</span><span class="tok-n">Flux</span><span class="tok-o">::</span><span class="tok-n">fromArray</span><span class="tok-o">);</span>
+
+		<span class="tok-n">flux</span><span class="tok-o">.</span><span class="tok-na">subscribe</span><span class="tok-o">(</span><span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">::</span><span class="tok-n">println</span><span class="tok-o">);</span>
+	<span class="tok-o">}</span>
+<span class="tok-o">}</span></code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Congratulations, you have finished this exercise. Several factory methods such as <code>concat</code> and <code>merge</code> are also available on instances.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="reactive-data-access">5. Reactive Data Access</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>About this Lab</strong></p>
+</div>
+<div class="paragraph">
+<p>You will learn how to use reactive MongoDB repositories and how to create reactive repository query methods.</p>
+</div>
+<div class="paragraph">
+<p><strong>Prerequisites</strong></p>
+</div>
+<div class="paragraph">
+<p>To complete these steps, you will need:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>The code checked out.</p>
+</li>
+<li>
+<p>The code imported into your IDE.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Estimated Duration</strong></p>
+</div>
+<div class="paragraph">
+<p><em>10 minutes</em></p>
+</div>
+<div class="paragraph">
+<p><strong>Creating repository query methods</strong></p>
+</div>
+<div class="paragraph">
+<p>Reactive query methods work pretty much the same as blocking repository query methods. Spring Data identifies reactive repositories by the use of reactive types in method signatures. Declaring a repository that extends <code>ReactiveCrudRepository</code> will inherit all declared methods and Spring Data will implement that repository using reactive infrastructure. Reactive repositories <strong>must</strong> use reactive result types, methods <em>can</em> accept reactive types (<code>Mono</code>, <code>Flux</code>) or resolved parameters (<code>String</code>, <code>int</code>, …).</p>
+</div>
+<div class="paragraph">
+<p>Spring Data executes either a single element query or a collection query based on the return type characteristics. <code>Mono</code> leads to a single element query, <code>Flux</code> can return many elements.</p>
+</div>
+<div class="paragraph">
+<p><strong>IndexController</strong></p>
+</div>
+<div class="paragraph">
+<p>The <code>IndexController</code> populates a <code>Model</code> and returns view name for the web application.</p>
+</div>
+<div class="paragraph">
+<p><strong>Steps</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Go to <code>IndexController</code>. The code contains three <code>TODO</code>s. Focus only on the upper two <code>TODO</code>s providing values for <code>hashLadder</code> and <code>coinsLadder</code> attributes.</p>
+</li>
+<li>
+<p><code>hashLadder</code> contains the top-10 users ordered by their hash rate, highest first. Stats regarding the hashrate are stored in <code>UserStat</code> and can be accessed through <code>UserStatRepository</code>.</p>
+</li>
+<li>
+<p>Go to <code>UserStatRepository</code> and create a reactive repository query method to return the top 10 <code>UserStat</code> objects ordered by <code>hashrate</code> (descending). The method would be named <code>findTop10ByOrderByHashrateDesc</code>.</p>
+</li>
+<li>
+<p><code>coinsLadder</code> in <code>IndexController</code> contains the top-10 users ordered by their mined coins, highest first. Stats regarding the mined coins are stored in <code>UserStat</code> and can be accessed through <code>UserStatRepository</code>.</p>
+</li>
+<li>
+<p>Go to <code>UserStatRepository</code> and create a reactive repository query method to return the top 10 <code>UserStat</code> objects ordered by <code>totalCoinsMined</code> (descending). The method would be named <code>findTop10ByOrderByTotalCoinsMinedDesc</code>.</p>
+</li>
+<li>
+<p>Now go back to <code>IndexController</code> and wire the repository query methods to the model attributes. Spring WebFlux accepts reactive types in the <code>Model</code>.</p>
+</li>
+</ol>
+</div>
+<div class="exampleblock">
+<div class="title">Example 3. IndexController.java</div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="java"><span class="tok-nd">@FieldDefaults</span><span class="tok-o">(</span><span class="tok-n">level</span> <span class="tok-o">=</span> <span class="tok-n">AccessLevel</span><span class="tok-o">.</span><span class="tok-na">PRIVATE</span><span class="tok-o">,</span> <span class="tok-n">makeFinal</span> <span class="tok-o">=</span> <span class="tok-kc">true</span><span class="tok-o">)</span>
+<span class="tok-nd">@RequiredArgsConstructor</span>
+<span class="tok-nd">@Controller</span>
+<span class="tok-kd">public</span> <span class="tok-kd">class</span> <span class="tok-nc">IndexController</span> <span class="tok-o">{</span>
+
+	<span class="tok-n">UserStatRepository</span> <span class="tok-n">userStatRepository</span><span class="tok-o">;</span>
+	<span class="tok-n">DogeProperties</span> <span class="tok-n">dogeProperties</span><span class="tok-o">;</span>
+
+	<span class="tok-nd">@GetMapping</span><span class="tok-o">(</span><span class="tok-s">&quot;/&quot;</span><span class="tok-o">)</span>
+	<span class="tok-n">String</span> <span class="tok-nf">getIndex</span><span class="tok-o">(</span><span class="tok-n">Model</span> <span class="tok-n">model</span><span class="tok-o">)</span> <span class="tok-o">{</span>
+
+		<span class="tok-n">model</span><span class="tok-o">.</span><span class="tok-na">addAttribute</span><span class="tok-o">(</span><span class="tok-s">&quot;poolName&quot;</span><span class="tok-o">,</span> <span class="tok-n">dogeProperties</span><span class="tok-o">.</span><span class="tok-na">getPoolName</span><span class="tok-o">());</span>
+
+		<span class="tok-n">model</span><span class="tok-o">.</span><span class="tok-na">addAttribute</span><span class="tok-o">(</span><span class="tok-s">&quot;hashLadder&quot;</span><span class="tok-o">,</span>
+				<span class="tok-n">userStatRepository</span><span class="tok-o">.</span><span class="tok-na">findTop10ByOrderByHashrateDesc</span><span class="tok-o">());</span>
+
+		<span class="tok-n">model</span><span class="tok-o">.</span><span class="tok-na">addAttribute</span><span class="tok-o">(</span><span class="tok-s">&quot;coinsLadder&quot;</span><span class="tok-o">,</span>
+				<span class="tok-n">userStatRepository</span><span class="tok-o">.</span><span class="tok-na">findTop10ByOrderByTotalCoinsMinedDesc</span><span class="tok-o">());</span>
+
+		<span class="tok-c1">// TODO: Calculate the overall gigaHashrate and miningUserCount taking</span>
+		<span class="tok-c1">// a reactive approach</span>
+		<span class="tok-n">model</span><span class="tok-o">.</span><span class="tok-na">addAttribute</span><span class="tok-o">(</span><span class="tok-s">&quot;gigaHashrate&quot;</span><span class="tok-o">,</span> <span class="tok-o">-</span><span class="tok-mf">1d</span><span class="tok-o">);</span>
+		<span class="tok-n">model</span><span class="tok-o">.</span><span class="tok-na">addAttribute</span><span class="tok-o">(</span><span class="tok-s">&quot;miningUserCount&quot;</span><span class="tok-o">,</span> <span class="tok-o">-</span><span class="tok-mi">1</span><span class="tok-o">);</span>
+
+		<span class="tok-k">return</span> <span class="tok-s">&quot;index&quot;</span><span class="tok-o">;</span>
+	<span class="tok-o">}</span>
+<span class="tok-o">}</span></code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="exampleblock">
+<div class="title">Example 4. UserStatRepository.java</div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="java"><span class="tok-kd">public</span> <span class="tok-kd">interface</span> <span class="tok-nc">UserStatRepository</span> <span class="tok-kd">extends</span> <span class="tok-n">ReactiveCrudRepository</span><span class="tok-o">&lt;</span><span class="tok-n">UserStat</span><span class="tok-o">,</span> <span class="tok-n">ObjectId</span><span class="tok-o">&gt;</span> <span class="tok-o">{</span>
+
+	<span class="tok-n">Flux</span><span class="tok-o">&lt;</span><span class="tok-n">UserStat</span><span class="tok-o">&gt;</span> <span class="tok-nf">findTop10ByOrderByHashrateDesc</span><span class="tok-o">();</span>
+
+	<span class="tok-n">Flux</span><span class="tok-o">&lt;</span><span class="tok-n">UserStat</span><span class="tok-o">&gt;</span> <span class="tok-nf">findTop10ByOrderByTotalCoinsMinedDesc</span><span class="tok-o">();</span>
+<span class="tok-o">}</span></code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Congratulations, you have finished this exercise.</p>
+</div>
+<div class="paragraph">
+<p><strong>Bonus</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Run <code>IndexControllerIntegrationTests</code> to verify that 3 of 4 tests pass. <code>IndexControllerIntegrationTests.indexModelShouldProvideModelAttributes</code> fails because Step 6 is not completed yet.</p>
+</li>
+<li>
+<p>Start now the application again. You will notice the start page has changed.</p>
+</li>
+</ol>
+</div>
+<div class="imageblock thumb">
+<div class="content">
+<img src="images/step-5-complete.png" alt="step 5 complete" width="640">
+</div>
+<div class="title">Figure 2. Index page showing users</div>
+</div>
+<div class="paragraph">
+<p><strong>Bonus</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Did you notice the <code>Hashrate greater</code> filter? And did you notice, there&#8217;s no code yet to handle the filtering? Do you want to fix that issue?</p>
+</li>
+<li>
+<p>Extend <code>IndexController</code> to take a non-mandatory numeric request parameter <code>hashFilter</code> and filter the two streams where <code>UserStats#Hashrate</code> is greater <code>hashFilter</code>. How many approaches can you find to do so?</p>
+</li>
+<li>
+<p>The <code>input</code> element should retain the previously entered value. Can you figure out how to do so by changing <code>Model</code> contents and <code>index.ftl</code>?</p>
+</li>
+<li>
+<p>Start now the application again and check whether your changes have been successful.</p>
+</li>
+<li>
+<p>You will notice that the subsequent code samples in the lab docs do not contain code to solve this bonus.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_reactive_computations">6. Reactive Computations</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>About this Lab</strong></p>
+</div>
+<div class="paragraph">
+<p>In this lab you&#8217;ll learn how to apply statistic computation in a deferred flow.</p>
+</div>
+<div class="paragraph">
+<p><strong>Prerequisites</strong></p>
+</div>
+<div class="paragraph">
+<p>To complete these steps, you will need:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Step 5, <a href="#reactive-data-access">Reactive Data Access</a> completed</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Estimated Duration</strong></p>
+</div>
+<div class="paragraph">
+<p><em>15 minutes</em></p>
+</div>
+<div class="paragraph">
+<p><strong>Missing Bits on the Index Page</strong></p>
+</div>
+<div class="paragraph">
+<p>The index page shows <code>-1</code> for <code>gigaHashrate</code> and <code>miningUserCount</code>. Both values require statistical computation based on the data in <code>UserStat</code>. That&#8217;s a sum of all hash rates and the user count. Spring WebFlux synchronizes computation of reactive types first before the actual model evaluation. That behavior allows setting values in a reactive flow. The computation in this lab should remain non-blocking and take advantage of the callback methods provided by the reactive types.</p>
+</div>
+<div class="paragraph">
+<p>This lab has multiple valid solutions.</p>
+</div>
+<div class="paragraph">
+<p><strong>Steps</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Go to <code>IndexController</code> and implement a computation to provide values for <code>gigaHashrate</code> and <code>miningUserCount</code>.</p>
+</li>
+<li>
+<p><code>Flux</code> provides callback methods for functions invoked on each published element. Expect the callback to happen on a different thread, maybe even callbacks by multiple threads at the same time. The attributes <code>gigaHashrate</code> and <code>miningUserCount</code> summarize the number of users and the hash rate. Did you use <code>AtomicLong</code>/<code>AtomicInteger</code> already? Both types are atomic counters for lock-free counting. Create  <code>AtomicLong hashrate</code> and <code>AtomicInteger users</code> variables and increment the values by applying a function with the <code>doOnNext</code> operator.</p>
+</li>
+<li>
+<p>The actual model values can be set on <code>Flux</code> completion. Set the model attributes by applying a function with the <code>doOnComplete</code> operator.</p>
+</li>
+<li>
+<p>Spring WebFlux requires the <code>Flux</code> in the model to synchronize execution. Add the <code>Flux</code> to the <code>Model</code>, the attribute name has no significance and can be any <code>String</code>.</p>
+</li>
+<li>
+<p>Start now the application again. You will notice the start page has changed.</p>
+</li>
+</ol>
+</div>
+<div class="imageblock thumb">
+<div class="content">
+<img src="images/step-6-complete.png" alt="step 6 complete" width="640">
+</div>
+<div class="title">Figure 3. Index page showing users</div>
+</div>
+<div style="page-break-after: always;"></div>
+<div class="paragraph">
+<p>Your code could look like:</p>
+</div>
+<div class="exampleblock">
+<div class="title">Example 5. IndexController.java</div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="java"><span class="tok-nd">@FieldDefaults</span><span class="tok-o">(</span><span class="tok-n">level</span> <span class="tok-o">=</span> <span class="tok-n">AccessLevel</span><span class="tok-o">.</span><span class="tok-na">PRIVATE</span><span class="tok-o">,</span> <span class="tok-n">makeFinal</span> <span class="tok-o">=</span> <span class="tok-kc">true</span><span class="tok-o">)</span>
+<span class="tok-nd">@RequiredArgsConstructor</span>
+<span class="tok-nd">@Controller</span>
+<span class="tok-kd">public</span> <span class="tok-kd">class</span> <span class="tok-nc">IndexController</span> <span class="tok-o">{</span>
+
+	<span class="tok-n">UserStatRepository</span> <span class="tok-n">userStatRepository</span><span class="tok-o">;</span>
+	<span class="tok-n">DogeProperties</span> <span class="tok-n">dogeProperties</span><span class="tok-o">;</span>
+
+	<span class="tok-nd">@GetMapping</span><span class="tok-o">(</span><span class="tok-s">&quot;/&quot;</span><span class="tok-o">)</span>
+	<span class="tok-n">String</span> <span class="tok-nf">getIndex</span><span class="tok-o">(</span><span class="tok-n">Model</span> <span class="tok-n">model</span><span class="tok-o">)</span> <span class="tok-o">{</span>
+
+		<span class="tok-n">model</span><span class="tok-o">.</span><span class="tok-na">addAttribute</span><span class="tok-o">(</span><span class="tok-s">&quot;poolName&quot;</span><span class="tok-o">,</span> <span class="tok-n">dogeProperties</span><span class="tok-o">.</span><span class="tok-na">getPoolName</span><span class="tok-o">());</span>
+
+		<span class="tok-n">model</span><span class="tok-o">.</span><span class="tok-na">addAttribute</span><span class="tok-o">(</span><span class="tok-s">&quot;hashLadder&quot;</span><span class="tok-o">,</span>
+				<span class="tok-n">userStatRepository</span><span class="tok-o">.</span><span class="tok-na">findTop10ByOrderByHashrateDesc</span><span class="tok-o">());</span>
+
+		<span class="tok-n">model</span><span class="tok-o">.</span><span class="tok-na">addAttribute</span><span class="tok-o">(</span><span class="tok-s">&quot;coinsLadder&quot;</span><span class="tok-o">,</span>
+				<span class="tok-n">userStatRepository</span><span class="tok-o">.</span><span class="tok-na">findTop10ByOrderByTotalCoinsMinedDesc</span><span class="tok-o">());</span>
+
+		<span class="tok-n">AtomicLong</span> <span class="tok-n">hashrate</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-n">AtomicLong</span><span class="tok-o">();</span>
+		<span class="tok-n">AtomicInteger</span> <span class="tok-n">users</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-n">AtomicInteger</span><span class="tok-o">();</span>
+
+		<span class="tok-n">Flux</span><span class="tok-o">&lt;</span><span class="tok-n">UserStat</span><span class="tok-o">&gt;</span> <span class="tok-n">userStatFlux</span> <span class="tok-o">=</span> <span class="tok-n">userStatRepository</span><span class="tok-o">.</span><span class="tok-na">findAll</span><span class="tok-o">()</span>
+				<span class="tok-o">.</span><span class="tok-na">doOnNext</span><span class="tok-o">(</span><span class="tok-n">userStat</span> <span class="tok-o">-&gt;</span> <span class="tok-n">hashrate</span><span class="tok-o">.</span><span class="tok-na">addAndGet</span><span class="tok-o">((</span><span class="tok-kt">long</span><span class="tok-o">)</span> <span class="tok-n">userStat</span><span class="tok-o">.</span><span class="tok-na">getHashrate</span><span class="tok-o">()))</span>
+				<span class="tok-o">.</span><span class="tok-na">doOnNext</span><span class="tok-o">(</span><span class="tok-n">userStat</span> <span class="tok-o">-&gt;</span> <span class="tok-n">users</span><span class="tok-o">.</span><span class="tok-na">incrementAndGet</span><span class="tok-o">()).</span><span class="tok-na">doOnComplete</span><span class="tok-o">(()</span> <span class="tok-o">-&gt;</span> <span class="tok-o">{</span>
+
+					<span class="tok-n">model</span><span class="tok-o">.</span><span class="tok-na">addAttribute</span><span class="tok-o">(</span><span class="tok-s">&quot;gigaHashrate&quot;</span><span class="tok-o">,</span> <span class="tok-n">hashrate</span><span class="tok-o">.</span><span class="tok-na">doubleValue</span><span class="tok-o">());</span>
+					<span class="tok-n">model</span><span class="tok-o">.</span><span class="tok-na">addAttribute</span><span class="tok-o">(</span><span class="tok-s">&quot;miningUserCount&quot;</span><span class="tok-o">,</span> <span class="tok-n">users</span><span class="tok-o">.</span><span class="tok-na">get</span><span class="tok-o">());</span>
+				<span class="tok-o">});</span>
+
+		<span class="tok-n">model</span><span class="tok-o">.</span><span class="tok-na">addAttribute</span><span class="tok-o">(</span><span class="tok-s">&quot;userStatFlux&quot;</span><span class="tok-o">,</span> <span class="tok-n">userStatFlux</span><span class="tok-o">);</span>
+
+		<span class="tok-k">return</span> <span class="tok-s">&quot;index&quot;</span><span class="tok-o">;</span>
+	<span class="tok-o">}</span>
+<span class="tok-o">}</span></code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Congratulations, you have finished this exercise.</p>
+</div>
+<div class="paragraph">
+<p><strong>Bonus</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Run <code>IndexControllerIntegrationTests</code> to verify that all tests pass.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="miner-detail-page">7. Miner Detail Page</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>About this Lab</strong></p>
+</div>
+<div class="paragraph">
+<p>You will learn how to combine objects emitted from multiple publishers and combined to create a composite result with reactive types.</p>
+</div>
+<div class="paragraph">
+<p><strong>Prerequisites</strong></p>
+</div>
+<div class="paragraph">
+<p>To complete these steps, you will need:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Step 5, <a href="#reactive-data-access">Reactive Data Access</a> completed</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Estimated Duration</strong></p>
+</div>
+<div class="paragraph">
+<p><em>10 minutes</em></p>
+</div>
+<div class="paragraph">
+<p><strong>Miner Page</strong></p>
+</div>
+<div class="paragraph">
+<p>The miner detail page shows details about the miner along with some stats. The miner details are available through <code>User</code>, stats from <code>UserStat</code>. <code>UserStat.id</code> is not the user id but a database-specific identifier. That&#8217;s why <code>UserStatRepository</code> requires a new repository query method to look up <code>UserStat</code> by user id.</p>
+</div>
+<div class="paragraph">
+<p><strong>Steps</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Go to <code>UserStatRepository</code> and add a new repository query method to look up <code>UserStat</code> by <code>UserId</code> returning a single element.</p>
+</li>
+<li>
+<p>Go to <code>MinerController</code> and fetch <code>User</code> from <code>UserRepository</code> and <code>UserStat</code> from <code>UserStatRepository</code>. Combine the publishers to a tuple and map the resulting <code>User</code> and <code>UserStat</code> objects into <code>MinerModel</code> with <code>MinerModel.of(…)</code>.</p>
+</li>
+<li>
+<p>Start now the application again. Click on a miner once the page has loaded.</p>
+</li>
+</ol>
+</div>
+<div class="imageblock thumb">
+<div class="content">
+<img src="images/step-7-complete.png" alt="step 7 complete" width="240">
+</div>
+<div class="title">Figure 4. Miner page showing user details</div>
+</div>
+<div style="page-break-after: always;"></div>
+<div class="paragraph">
+<p>Your code could look like:</p>
+</div>
+<div class="exampleblock">
+<div class="title">Example 6. MinerController.java</div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="java"><span class="tok-nd">@Controller</span>
+<span class="tok-nd">@FieldDefaults</span><span class="tok-o">(</span><span class="tok-n">level</span> <span class="tok-o">=</span> <span class="tok-n">AccessLevel</span><span class="tok-o">.</span><span class="tok-na">PRIVATE</span><span class="tok-o">,</span> <span class="tok-n">makeFinal</span> <span class="tok-o">=</span> <span class="tok-kc">true</span><span class="tok-o">)</span>
+<span class="tok-nd">@RequiredArgsConstructor</span>
+<span class="tok-kd">public</span> <span class="tok-kd">class</span> <span class="tok-nc">MinerController</span> <span class="tok-o">{</span>
+
+	<span class="tok-n">UserRepository</span> <span class="tok-n">userRepository</span><span class="tok-o">;</span>
+	<span class="tok-n">UserStatRepository</span> <span class="tok-n">userStatRepository</span><span class="tok-o">;</span>
+
+	<span class="tok-nd">@GetMapping</span><span class="tok-o">(</span><span class="tok-s">&quot;/miner/{id}&quot;</span><span class="tok-o">)</span>
+	<span class="tok-n">String</span> <span class="tok-nf">getMiner</span><span class="tok-o">(</span><span class="tok-nd">@PathVariable</span> <span class="tok-n">String</span> <span class="tok-n">id</span><span class="tok-o">,</span> <span class="tok-n">Model</span> <span class="tok-n">model</span><span class="tok-o">)</span> <span class="tok-o">{</span>
+
+		<span class="tok-n">Mono</span><span class="tok-o">&lt;</span><span class="tok-n">MinerModel</span><span class="tok-o">&gt;</span> <span class="tok-n">compositeModel</span> <span class="tok-o">=</span> <span class="tok-n">userRepository</span><span class="tok-o">.</span><span class="tok-na">findOne</span><span class="tok-o">(</span><span class="tok-n">id</span><span class="tok-o">)</span>
+				<span class="tok-o">.</span><span class="tok-na">and</span><span class="tok-o">(</span><span class="tok-n">user</span> <span class="tok-o">-&gt;</span> <span class="tok-n">userStatRepository</span><span class="tok-o">.</span><span class="tok-na">findByUserId</span><span class="tok-o">(</span><span class="tok-n">user</span><span class="tok-o">.</span><span class="tok-na">getId</span><span class="tok-o">()))</span>
+				<span class="tok-o">.</span><span class="tok-na">map</span><span class="tok-o">(</span><span class="tok-n">tuple</span> <span class="tok-o">-&gt;</span> <span class="tok-n">MinerModel</span><span class="tok-o">.</span><span class="tok-na">of</span><span class="tok-o">(</span><span class="tok-n">tuple</span><span class="tok-o">.</span><span class="tok-na">getT1</span><span class="tok-o">(),</span> <span class="tok-n">tuple</span><span class="tok-o">.</span><span class="tok-na">getT2</span><span class="tok-o">()));</span>
+
+		<span class="tok-n">model</span><span class="tok-o">.</span><span class="tok-na">addAttribute</span><span class="tok-o">(</span><span class="tok-s">&quot;model&quot;</span><span class="tok-o">,</span> <span class="tok-n">compositeModel</span><span class="tok-o">);</span>
+
+		<span class="tok-k">return</span> <span class="tok-s">&quot;miner&quot;</span><span class="tok-o">;</span>
+	<span class="tok-o">}</span>
+<span class="tok-o">}</span></code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Congratulations, you have finished this exercise.</p>
+</div>
+</div>
+</div>
+<h1 id="_bonus" class="sect0">Bonus</h1>
+<div class="paragraph">
+<p>These are bonus steps explaining advanced reactive programming model patterns.</p>
+</div>
+<div class="sect1">
+<h2 id="_rank_on_miner_detail_page">1. Rank on Miner Detail Page</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>About this Lab</strong></p>
+</div>
+<div class="paragraph">
+<p>You will learn how to apply stream processing for long-running tasks that process potentially huge data sets.</p>
+</div>
+<div class="paragraph">
+<p><strong>Prerequisites</strong></p>
+</div>
+<div class="paragraph">
+<p>To complete these steps, you will need:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Step 5, <a href="#reactive-data-access">Reactive Data Access</a> completed</p>
+</li>
+<li>
+<p>Step 7, <a href="#miner-detail-page">Miner Detail Page</a> completed</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Miner Page</strong></p>
+</div>
+<div class="paragraph">
+<p>The miner detail page shows ranking by coins and by hash rate. These values derive from the state of the system, in particular the coins and hash rates of all users. These details aren&#8217;t something that is computed on the fly but rather refreshed in certain intervals. For this workshop, we can use Spring WebFlux to trigger processing because we don&#8217;t want to establish a complex scheduling infrastructure.</p>
+</div>
+<div class="paragraph">
+<p><strong>Maintenance Job: CalculateRanks</strong></p>
+</div>
+<div class="paragraph">
+<p>The goal is to create a maintenance job that can be started any time and that processes the whole user base, updating <code>UserStat</code> ranks.</p>
+</div>
+<div class="paragraph">
+<p><strong>Steps</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Create a new package <code>org.dogepool.reactiveboot.service</code> with a new <code>@Component</code> class named <code>CalculateRanks</code>.</p>
+</li>
+<li>
+<p>Use <code>ReactiveMongoTemplate</code> to iterate over <code>UserStat</code>. Using a MongoDB query with the appropriate sort order helps to retrieve results in the order of ranking. Make sure that results are published on a single thread (see <code>Schedulers.single()</code>). Using two distinct reactive flows might be the simpler approach than a combined attempt to calculate both ranks in a single pass.</p>
+</li>
+<li>
+<p>Use <code>flatMap(…)</code> and an <code>AtomicLong</code> counter to increment the rank counter. Update <code>UserStat</code> selectively by setting just the rank property.</p>
+</li>
+<li>
+<p>Repeat for the other rank property.</p>
+</li>
+<li>
+<p>Synchronize both <code>Flux</code> with <code>Flux.merge(…)</code> returning the <code>.count()</code>.</p>
+</li>
+<li>
+<p>Go to <code>MaintenanceController</code> and wire the dependency to <code>CalculateRanks</code>. Call the method to recalculate the ranks.</p>
+</li>
+<li>
+<p>Invoke the maintenance job with <code>cURL</code> or your browser.</p>
+</li>
+<li>
+<p>Start now the application again. Click on a miner once the page has loaded.</p>
+</li>
+</ol>
+</div>
+<div class="imageblock thumb">
+<div class="content">
+<img src="images/step-8-complete.png" alt="step 8 complete" width="640">
+</div>
+<div class="title">Figure 5. Miner page showing user details</div>
+</div>
+<div class="exampleblock">
+<div class="title">Example 7. Example cURL Request</div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="shell">curl -X POST http://localhost:8080/maintenance/ranks</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div style="page-break-after: always;"></div>
+<div class="paragraph">
+<p>Your code could look like:</p>
+</div>
+<div class="exampleblock">
+<div class="title">Example 8. MaintenanceController.java</div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="java"><span class="tok-nd">@RestController</span>
+<span class="tok-nd">@FieldDefaults</span><span class="tok-o">(</span><span class="tok-n">level</span> <span class="tok-o">=</span> <span class="tok-n">AccessLevel</span><span class="tok-o">.</span><span class="tok-na">PRIVATE</span><span class="tok-o">,</span> <span class="tok-n">makeFinal</span> <span class="tok-o">=</span> <span class="tok-kc">true</span><span class="tok-o">)</span>
+<span class="tok-nd">@RequiredArgsConstructor</span>
+<span class="tok-kd">public</span> <span class="tok-kd">class</span> <span class="tok-nc">MaintenanceController</span> <span class="tok-o">{</span>
+
+	<span class="tok-n">CalculateRanks</span> <span class="tok-n">calculateRanks</span><span class="tok-o">;</span>
+
+	<span class="tok-nd">@PostMapping</span><span class="tok-o">(</span><span class="tok-s">&quot;maintenance/ranks&quot;</span><span class="tok-o">)</span>
+	<span class="tok-kd">public</span> <span class="tok-n">Mono</span><span class="tok-o">&lt;</span><span class="tok-n">Long</span><span class="tok-o">&gt;</span> <span class="tok-nf">recalculateRanks</span><span class="tok-o">()</span> <span class="tok-o">{</span>
+
+		<span class="tok-k">return</span> <span class="tok-n">calculateRanks</span><span class="tok-o">.</span><span class="tok-na">recalculateRanks</span><span class="tok-o">();</span>
+	<span class="tok-o">}</span>
+<span class="tok-o">}</span></code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="exampleblock">
+<div class="title">Example 9. CalculateRanks.java</div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="java"><span class="tok-nd">@Component</span>
+<span class="tok-nd">@FieldDefaults</span><span class="tok-o">(</span><span class="tok-n">level</span> <span class="tok-o">=</span> <span class="tok-n">AccessLevel</span><span class="tok-o">.</span><span class="tok-na">PRIVATE</span><span class="tok-o">,</span> <span class="tok-n">makeFinal</span> <span class="tok-o">=</span> <span class="tok-kc">true</span><span class="tok-o">)</span>
+<span class="tok-nd">@RequiredArgsConstructor</span>
+<span class="tok-kd">public</span> <span class="tok-kd">class</span> <span class="tok-nc">CalculateRanks</span> <span class="tok-o">{</span>
+
+	<span class="tok-n">ReactiveMongoTemplate</span> <span class="tok-n">mongoTemplate</span><span class="tok-o">;</span>
+
+	<span class="tok-kd">public</span> <span class="tok-n">Mono</span><span class="tok-o">&lt;</span><span class="tok-n">Long</span><span class="tok-o">&gt;</span> <span class="tok-nf">recalculateRanks</span><span class="tok-o">()</span> <span class="tok-o">{</span>
+		<span class="tok-k">return</span> <span class="tok-n">Flux</span><span class="tok-o">.</span><span class="tok-na">merge</span><span class="tok-o">(</span><span class="tok-n">updateRankByHash</span><span class="tok-o">(),</span> <span class="tok-n">updateRankByCoins</span><span class="tok-o">()).</span><span class="tok-na">count</span><span class="tok-o">();</span>
+	<span class="tok-o">}</span>
+
+	<span class="tok-kd">private</span> <span class="tok-n">Flux</span><span class="tok-o">&lt;</span><span class="tok-n">UpdateResult</span><span class="tok-o">&gt;</span> <span class="tok-nf">updateRankByCoins</span><span class="tok-o">()</span> <span class="tok-o">{</span>
+
+		<span class="tok-n">Query</span> <span class="tok-n">query</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-n">Query</span><span class="tok-o">().</span><span class="tok-na">with</span><span class="tok-o">(</span><span class="tok-k">new</span> <span class="tok-n">Sort</span><span class="tok-o">(</span><span class="tok-n">Direction</span><span class="tok-o">.</span><span class="tok-na">DESC</span><span class="tok-o">,</span> <span class="tok-s">&quot;totalCoinsMined&quot;</span><span class="tok-o">));</span>
+		<span class="tok-n">AtomicLong</span> <span class="tok-n">atomicLong</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-n">AtomicLong</span><span class="tok-o">();</span>
+
+		<span class="tok-k">return</span> <span class="tok-n">mongoTemplate</span>
+				<span class="tok-o">.</span><span class="tok-na">find</span><span class="tok-o">(</span><span class="tok-n">query</span><span class="tok-o">,</span> <span class="tok-n">UserStat</span><span class="tok-o">.</span><span class="tok-na">class</span><span class="tok-o">)</span>
+				<span class="tok-o">.</span><span class="tok-na">publishOn</span><span class="tok-o">(</span><span class="tok-n">Schedulers</span><span class="tok-o">.</span><span class="tok-na">single</span><span class="tok-o">())</span>
+				<span class="tok-o">.</span><span class="tok-na">flatMap</span><span class="tok-o">(</span>
+						<span class="tok-n">userStat</span> <span class="tok-o">-&gt;</span> <span class="tok-o">{</span>
+
+							<span class="tok-kt">long</span> <span class="tok-n">rank</span> <span class="tok-o">=</span> <span class="tok-n">atomicLong</span><span class="tok-o">.</span><span class="tok-na">incrementAndGet</span><span class="tok-o">();</span>
+
+							<span class="tok-n">Query</span> <span class="tok-n">userStatQuery</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-n">Query</span><span class="tok-o">(</span><span class="tok-n">Criteria</span><span class="tok-o">.</span><span class="tok-na">where</span><span class="tok-o">(</span><span class="tok-s">&quot;id&quot;</span><span class="tok-o">).</span><span class="tok-na">is</span><span class="tok-o">(</span>
+									<span class="tok-n">userStat</span><span class="tok-o">.</span><span class="tok-na">getId</span><span class="tok-o">()));</span>
+
+							<span class="tok-k">return</span> <span class="tok-n">mongoTemplate</span><span class="tok-o">.</span><span class="tok-na">updateFirst</span><span class="tok-o">(</span><span class="tok-n">userStatQuery</span><span class="tok-o">,</span>
+									<span class="tok-k">new</span> <span class="tok-n">Update</span><span class="tok-o">().</span><span class="tok-na">set</span><span class="tok-o">(</span><span class="tok-s">&quot;rankByCoins&quot;</span><span class="tok-o">,</span> <span class="tok-n">rank</span><span class="tok-o">),</span> <span class="tok-n">UserStat</span><span class="tok-o">.</span><span class="tok-na">class</span><span class="tok-o">);</span>
+						<span class="tok-o">});</span>
+	<span class="tok-o">}</span>
+
+	<span class="tok-kd">private</span> <span class="tok-n">Flux</span><span class="tok-o">&lt;</span><span class="tok-n">UpdateResult</span><span class="tok-o">&gt;</span> <span class="tok-nf">updateRankByHash</span><span class="tok-o">()</span> <span class="tok-o">{</span>
+
+		<span class="tok-n">Query</span> <span class="tok-n">query</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-n">Query</span><span class="tok-o">().</span><span class="tok-na">with</span><span class="tok-o">(</span><span class="tok-k">new</span> <span class="tok-n">Sort</span><span class="tok-o">(</span><span class="tok-n">Direction</span><span class="tok-o">.</span><span class="tok-na">DESC</span><span class="tok-o">,</span> <span class="tok-s">&quot;hashrate&quot;</span><span class="tok-o">));</span>
+		<span class="tok-n">AtomicLong</span> <span class="tok-n">atomicLong</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-n">AtomicLong</span><span class="tok-o">();</span>
+
+		<span class="tok-k">return</span> <span class="tok-n">mongoTemplate</span>
+				<span class="tok-o">.</span><span class="tok-na">find</span><span class="tok-o">(</span><span class="tok-n">query</span><span class="tok-o">,</span> <span class="tok-n">UserStat</span><span class="tok-o">.</span><span class="tok-na">class</span><span class="tok-o">)</span>
+				<span class="tok-o">.</span><span class="tok-na">publishOn</span><span class="tok-o">(</span><span class="tok-n">Schedulers</span><span class="tok-o">.</span><span class="tok-na">single</span><span class="tok-o">())</span>
+				<span class="tok-o">.</span><span class="tok-na">flatMap</span><span class="tok-o">(</span>
+						<span class="tok-n">userStat</span> <span class="tok-o">-&gt;</span> <span class="tok-o">{</span>
+
+							<span class="tok-kt">long</span> <span class="tok-n">rank</span> <span class="tok-o">=</span> <span class="tok-n">atomicLong</span><span class="tok-o">.</span><span class="tok-na">incrementAndGet</span><span class="tok-o">();</span>
+
+							<span class="tok-n">Query</span> <span class="tok-n">userStatQuery</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-n">Query</span><span class="tok-o">(</span><span class="tok-n">Criteria</span><span class="tok-o">.</span><span class="tok-na">where</span><span class="tok-o">(</span><span class="tok-s">&quot;id&quot;</span><span class="tok-o">).</span><span class="tok-na">is</span><span class="tok-o">(</span>
+									<span class="tok-n">userStat</span><span class="tok-o">.</span><span class="tok-na">getId</span><span class="tok-o">()));</span>
+
+							<span class="tok-k">return</span> <span class="tok-n">mongoTemplate</span><span class="tok-o">.</span><span class="tok-na">updateFirst</span><span class="tok-o">(</span><span class="tok-n">userStatQuery</span><span class="tok-o">,</span>
+									<span class="tok-k">new</span> <span class="tok-n">Update</span><span class="tok-o">().</span><span class="tok-na">set</span><span class="tok-o">(</span><span class="tok-s">&quot;rankByHash&quot;</span><span class="tok-o">,</span> <span class="tok-n">rank</span><span class="tok-o">),</span> <span class="tok-n">UserStat</span><span class="tok-o">.</span><span class="tok-na">class</span><span class="tok-o">);</span>
+						<span class="tok-o">});</span>
+	<span class="tok-o">}</span>
+<span class="tok-o">}</span></code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Congratulations, you have finished this exercise.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_reactive_micro_proxy">2. Reactive Micro-Proxy</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>About this Lab</strong></p>
+</div>
+<div class="paragraph">
+<p>You will learn how to use Spring 5&#8217;s functional <code>WebClient</code> to set up a reactive microproxy.</p>
+</div>
+<div class="paragraph">
+<p><strong>Prerequisites</strong></p>
+</div>
+<div class="paragraph">
+<p>To complete these steps, you will need:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Step 5, <a href="#reactive-data-access">Reactive Data Access</a> completed</p>
+</li>
+<li>
+<p>Step 7, <a href="#miner-detail-page">Miner Detail Page</a> completed</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Miner Page</strong></p>
+</div>
+<div class="paragraph">
+<p>Did you notice the avatar image source? It points to <code><a href="https://randomuser.me/api/portraits/…" class="bare">https://randomuser.me/api/portraits/…</a></code>. Using external data sources with client-side applications might require CORS if resources are scripts or accessed through JavaScript. Let&#8217;s create a micro-proxy and adjust the miner view template to point towards our micro-proxy.</p>
+</div>
+<div class="paragraph">
+<p><strong>Spring 5&#8217;s functional <code>WebClient</code></strong></p>
+</div>
+<div class="paragraph">
+<p>Spring Framework 5 comes with a functional <code>WebClient</code> that integrates with Project Reactor&#8217;s HTTP client for reactive HTTP communication. <code>WebClient</code> can be used together with Spring WebFlux to proxy requests to a different host and stream back results.</p>
+</div>
+<div class="paragraph">
+<p><strong>Steps</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Go to <code>MinerController</code> and create two handler methods, one mapped to <code>GET /miner/{id}/avatar</code> and the other mapped to <code>/miner/{id}/avatar/small</code> Returning <code>Mono&lt;ResponseEntity&lt;Flux&lt;ByteBuffer&gt;&gt;&gt;</code> is a good idea because HTTP response headers (<code>Content-Type</code>) should be set.</p>
+</li>
+<li>
+<p>Create a <code>WebClient</code> instance initialized at instance-level with <code>WebClient.builder().clientConnector(new ReactorClientHttpConnector()).build()</code>.</p>
+</li>
+<li>
+<p>Implement the mapped methods: Lookup <code>User</code> by <code>id</code> from the URL mapping. Fetch the <code>UserProfile</code> and request the avatar URL with <code>WebClient</code>.</p>
+</li>
+<li>
+<p>Initiate web exchange and map the result.  Construct <code>HttpHeaders</code> by extracting the <code>Content-Type</code> header from the proxy target request so the current response passes the header value through. Return the response status and body as <code>ByteBuffer</code> (<code>ClientResponse.bodyToFlux(ByteBuffer.class)</code>) inside a <code>ResponseEntity</code>.</p>
+</li>
+<li>
+<p>Go to <code>src/main/resources/templates/miner.ftl</code>. Replace the avatar image URL to point to <code>/miner/${model.nickname}/avatar</code> and small avatar to <code>/miner/${model.nickname}/avatar/small</code>.</p>
+</li>
+<li>
+<p>Start now the application again. Click on a miner once the page has loaded. Inspect the avatar image sources.</p>
+</li>
+</ol>
+</div>
+<div style="page-break-after: always;"></div>
+<div class="paragraph">
+<p>Your code could look like:</p>
+</div>
+<div class="exampleblock">
+<div class="title">Example 10. MinerController.java</div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="java"><span class="tok-nd">@Controller</span>
+<span class="tok-nd">@FieldDefaults</span><span class="tok-o">(</span><span class="tok-n">level</span> <span class="tok-o">=</span> <span class="tok-n">AccessLevel</span><span class="tok-o">.</span><span class="tok-na">PRIVATE</span><span class="tok-o">,</span> <span class="tok-n">makeFinal</span> <span class="tok-o">=</span> <span class="tok-kc">true</span><span class="tok-o">)</span>
+<span class="tok-nd">@RequiredArgsConstructor</span>
+<span class="tok-kd">public</span> <span class="tok-kd">class</span> <span class="tok-nc">MinerController</span> <span class="tok-o">{</span>
+
+	<span class="tok-n">UserRepository</span> <span class="tok-n">userRepository</span><span class="tok-o">;</span>
+	<span class="tok-n">UserStatRepository</span> <span class="tok-n">userStatRepository</span><span class="tok-o">;</span>
+	<span class="tok-n">WebClient</span> <span class="tok-n">webClient</span> <span class="tok-o">=</span> <span class="tok-n">WebClient</span><span class="tok-o">.</span><span class="tok-na">builder</span><span class="tok-o">()</span>
+			<span class="tok-o">.</span><span class="tok-na">clientConnector</span><span class="tok-o">(</span><span class="tok-k">new</span> <span class="tok-n">ReactorClientHttpConnector</span><span class="tok-o">()).</span><span class="tok-na">build</span><span class="tok-o">()</span>
+			<span class="tok-o">.</span><span class="tok-na">filter</span><span class="tok-o">(</span><span class="tok-n">userAgent</span><span class="tok-o">());</span>
+
+	<span class="tok-nd">@GetMapping</span><span class="tok-o">(</span><span class="tok-s">&quot;/miner/{id}&quot;</span><span class="tok-o">)</span>
+	<span class="tok-n">String</span> <span class="tok-nf">getMiner</span><span class="tok-o">(</span><span class="tok-nd">@PathVariable</span> <span class="tok-n">String</span> <span class="tok-n">id</span><span class="tok-o">,</span> <span class="tok-n">Model</span> <span class="tok-n">model</span><span class="tok-o">)</span> <span class="tok-o">{</span>
+
+		<span class="tok-n">Mono</span><span class="tok-o">&lt;</span><span class="tok-n">MinerModel</span><span class="tok-o">&gt;</span> <span class="tok-n">compositeModel</span> <span class="tok-o">=</span> <span class="tok-n">userRepository</span><span class="tok-o">.</span><span class="tok-na">findOne</span><span class="tok-o">(</span><span class="tok-n">id</span><span class="tok-o">)</span>
+				<span class="tok-o">.</span><span class="tok-na">and</span><span class="tok-o">(</span><span class="tok-n">user</span> <span class="tok-o">-&gt;</span> <span class="tok-n">userStatRepository</span><span class="tok-o">.</span><span class="tok-na">findByUserId</span><span class="tok-o">(</span><span class="tok-n">user</span><span class="tok-o">.</span><span class="tok-na">getId</span><span class="tok-o">()))</span>
+				<span class="tok-o">.</span><span class="tok-na">map</span><span class="tok-o">(</span><span class="tok-n">tuple</span> <span class="tok-o">-&gt;</span> <span class="tok-n">MinerModel</span><span class="tok-o">.</span><span class="tok-na">of</span><span class="tok-o">(</span><span class="tok-n">tuple</span><span class="tok-o">.</span><span class="tok-na">getT1</span><span class="tok-o">(),</span> <span class="tok-n">tuple</span><span class="tok-o">.</span><span class="tok-na">getT2</span><span class="tok-o">()));</span>
+
+		<span class="tok-n">model</span><span class="tok-o">.</span><span class="tok-na">addAttribute</span><span class="tok-o">(</span><span class="tok-s">&quot;model&quot;</span><span class="tok-o">,</span> <span class="tok-n">compositeModel</span><span class="tok-o">);</span>
+
+		<span class="tok-k">return</span> <span class="tok-s">&quot;miner&quot;</span><span class="tok-o">;</span>
+	<span class="tok-o">}</span>
+
+	<span class="tok-nd">@GetMapping</span><span class="tok-o">(</span><span class="tok-s">&quot;/miner/{id}/avatar&quot;</span><span class="tok-o">)</span>
+	<span class="tok-nd">@ResponseBody</span>
+	<span class="tok-n">Mono</span><span class="tok-o">&lt;</span><span class="tok-n">ResponseEntity</span><span class="tok-o">&lt;</span><span class="tok-n">Flux</span><span class="tok-o">&lt;</span><span class="tok-n">ByteBuffer</span><span class="tok-o">&gt;&gt;&gt;</span> <span class="tok-nf">getAvatar</span><span class="tok-o">(</span><span class="tok-nd">@PathVariable</span> <span class="tok-n">String</span> <span class="tok-n">id</span><span class="tok-o">)</span> <span class="tok-o">{</span>
+		<span class="tok-k">return</span> <span class="tok-n">fetchAvatar</span><span class="tok-o">(</span><span class="tok-n">userRepository</span><span class="tok-o">.</span><span class="tok-na">findOne</span><span class="tok-o">(</span><span class="tok-n">id</span><span class="tok-o">).</span><span class="tok-na">map</span><span class="tok-o">(</span><span class="tok-n">User</span><span class="tok-o">::</span><span class="tok-n">getUserProfile</span><span class="tok-o">)</span>
+				<span class="tok-o">.</span><span class="tok-na">map</span><span class="tok-o">(</span><span class="tok-n">UserProfile</span><span class="tok-o">::</span><span class="tok-n">getAvatarUrl</span><span class="tok-o">));</span>
+	<span class="tok-o">}</span>
+
+	<span class="tok-nd">@GetMapping</span><span class="tok-o">(</span><span class="tok-s">&quot;/miner/{id}/avatar/small&quot;</span><span class="tok-o">)</span>
+	<span class="tok-nd">@ResponseBody</span>
+	<span class="tok-n">Mono</span><span class="tok-o">&lt;</span><span class="tok-n">ResponseEntity</span><span class="tok-o">&lt;</span><span class="tok-n">Flux</span><span class="tok-o">&lt;</span><span class="tok-n">ByteBuffer</span><span class="tok-o">&gt;&gt;&gt;</span> <span class="tok-nf">getSmallAvatar</span><span class="tok-o">(</span><span class="tok-nd">@PathVariable</span> <span class="tok-n">String</span> <span class="tok-n">id</span><span class="tok-o">)</span> <span class="tok-o">{</span>
+		<span class="tok-k">return</span> <span class="tok-n">fetchAvatar</span><span class="tok-o">(</span><span class="tok-n">userRepository</span><span class="tok-o">.</span><span class="tok-na">findOne</span><span class="tok-o">(</span><span class="tok-n">id</span><span class="tok-o">).</span><span class="tok-na">map</span><span class="tok-o">(</span><span class="tok-n">User</span><span class="tok-o">::</span><span class="tok-n">getUserProfile</span><span class="tok-o">)</span>
+				<span class="tok-o">.</span><span class="tok-na">map</span><span class="tok-o">(</span><span class="tok-n">UserProfile</span><span class="tok-o">::</span><span class="tok-n">getSmallAvatarUrl</span><span class="tok-o">));</span>
+	<span class="tok-o">}</span>
+
+	<span class="tok-kd">private</span> <span class="tok-n">Mono</span><span class="tok-o">&lt;</span><span class="tok-n">ResponseEntity</span><span class="tok-o">&lt;</span><span class="tok-n">Flux</span><span class="tok-o">&lt;</span><span class="tok-n">ByteBuffer</span><span class="tok-o">&gt;&gt;&gt;</span> <span class="tok-nf">fetchAvatar</span><span class="tok-o">(</span><span class="tok-n">Mono</span><span class="tok-o">&lt;</span><span class="tok-n">String</span><span class="tok-o">&gt;</span> <span class="tok-n">map</span><span class="tok-o">)</span> <span class="tok-o">{</span>
+
+		<span class="tok-k">return</span> <span class="tok-n">map</span><span class="tok-o">.</span><span class="tok-na">then</span><span class="tok-o">(</span><span class="tok-n">s</span> <span class="tok-o">-&gt;</span> <span class="tok-n">webClient</span><span class="tok-o">.</span><span class="tok-na">get</span><span class="tok-o">().</span><span class="tok-na">uri</span><span class="tok-o">(</span><span class="tok-n">s</span><span class="tok-o">).</span><span class="tok-na">exchange</span><span class="tok-o">())</span> <span class="tok-c1">//</span>
+				<span class="tok-o">.</span><span class="tok-na">map</span><span class="tok-o">(</span><span class="tok-n">resp</span> <span class="tok-o">-&gt;</span> <span class="tok-o">{</span>
+
+					<span class="tok-n">HttpHeaders</span> <span class="tok-n">headers</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-n">HttpHeaders</span><span class="tok-o">();</span>
+
+					<span class="tok-n">Optional</span><span class="tok-o">&lt;</span><span class="tok-n">MediaType</span><span class="tok-o">&gt;</span> <span class="tok-n">asString</span> <span class="tok-o">=</span> <span class="tok-n">Optional</span><span class="tok-o">.</span><span class="tok-na">ofNullable</span><span class="tok-o">(</span><span class="tok-n">resp</span><span class="tok-o">.</span><span class="tok-na">headers</span><span class="tok-o">()</span>
+							<span class="tok-o">.</span><span class="tok-na">asHttpHeaders</span><span class="tok-o">().</span><span class="tok-na">getContentType</span><span class="tok-o">());</span>
+					<span class="tok-n">headers</span><span class="tok-o">.</span><span class="tok-na">add</span><span class="tok-o">(</span><span class="tok-n">HttpHeaders</span><span class="tok-o">.</span><span class="tok-na">CONTENT_TYPE</span><span class="tok-o">,</span> <span class="tok-n">asString</span>
+							<span class="tok-o">.</span><span class="tok-na">map</span><span class="tok-o">(</span><span class="tok-n">MimeType</span><span class="tok-o">::</span><span class="tok-n">toString</span><span class="tok-o">).</span><span class="tok-na">orElse</span><span class="tok-o">(</span><span class="tok-n">MediaType</span><span class="tok-o">.</span><span class="tok-na">IMAGE_JPEG_VALUE</span><span class="tok-o">));</span>
+
+					<span class="tok-k">return</span> <span class="tok-k">new</span> <span class="tok-n">ResponseEntity</span><span class="tok-o">&lt;&gt;(</span><span class="tok-n">resp</span><span class="tok-o">.</span><span class="tok-na">bodyToFlux</span><span class="tok-o">(</span><span class="tok-n">ByteBuffer</span><span class="tok-o">.</span><span class="tok-na">class</span><span class="tok-o">),</span>
+							<span class="tok-n">headers</span><span class="tok-o">,</span> <span class="tok-n">resp</span><span class="tok-o">.</span><span class="tok-na">statusCode</span><span class="tok-o">());</span>
+
+				<span class="tok-o">});</span>
+	<span class="tok-o">}</span>
+
+	<span class="tok-kd">private</span> <span class="tok-n">ExchangeFilterFunction</span> <span class="tok-nf">userAgent</span><span class="tok-o">()</span> <span class="tok-o">{</span>
+
+		<span class="tok-k">return</span> <span class="tok-o">(</span><span class="tok-n">clientRequest</span><span class="tok-o">,</span> <span class="tok-n">exchangeFunction</span><span class="tok-o">)</span> <span class="tok-o">-&gt;</span> <span class="tok-o">{</span>
+			<span class="tok-n">ClientRequest</span> <span class="tok-n">newRequest</span> <span class="tok-o">=</span> <span class="tok-n">ClientRequest</span><span class="tok-o">.</span><span class="tok-na">from</span><span class="tok-o">(</span><span class="tok-n">clientRequest</span><span class="tok-o">)</span>
+					<span class="tok-o">.</span><span class="tok-na">header</span><span class="tok-o">(</span><span class="tok-s">&quot;User-Agent&quot;</span><span class="tok-o">,</span> <span class="tok-s">&quot;Spring Framework WebClient&quot;</span><span class="tok-o">).</span><span class="tok-na">build</span><span class="tok-o">();</span>
+			<span class="tok-k">return</span> <span class="tok-n">exchangeFunction</span><span class="tok-o">.</span><span class="tok-na">exchange</span><span class="tok-o">(</span><span class="tok-n">newRequest</span><span class="tok-o">);</span>
+		<span class="tok-o">};</span>
+	<span class="tok-o">}</span>
+<span class="tok-o">}</span></code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Congratulations, you have finished this exercise.</p>
+</div>
+</div>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Version 1.0<br>
+Last updated 2017-03-20 10:31:51 CET
+</div>
+</div>
+</body>
+</html>
