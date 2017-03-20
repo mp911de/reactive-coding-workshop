@@ -29,7 +29,7 @@
 	<div class="ui divider"></div>
 	<div class="ui input" id="filter-form">
 		<form action="/">
-			<input name="hashrateFilter" type="number" placeholder="Hashrate greater"/>
+			<input name="hashrateFilter" type="number" placeholder="Hashrate greater" value="${hashrateFilter}"/>
 			<button class="ui primary basic button" type="submit">Apply filter</button>
 		</form>
 	</div>

@@ -68,7 +68,7 @@ public class IndexControllerIntegrationTests {
 	@Test
 	public void indexModelShouldResolveView() {
 
-		String view = indexController.getIndex(new ExtendedModelMap());
+		String view = indexController.getIndex(new ExtendedModelMap(), 0);
 
 		assertThat(view).isEqualTo("index");
 	}
@@ -78,7 +78,7 @@ public class IndexControllerIntegrationTests {
 
 		ExtendedModelMap model = new ExtendedModelMap();
 
-		indexController.getIndex(model);
+		indexController.getIndex(model, 0);
 
 		assertThat(model).containsKeys("poolName", "hashLadder", "coinsLadder");
 
@@ -109,7 +109,7 @@ public class IndexControllerIntegrationTests {
 	public void indexModelHashLadderShouldResolveToUsers() {
 
 		ExtendedModelMap model = new ExtendedModelMap();
-		indexController.getIndex(model);
+		indexController.getIndex(model, 1);
 
 		Flux<UserStat> flux = (Flux<UserStat>) model.get("hashLadder");
 
@@ -123,7 +123,7 @@ public class IndexControllerIntegrationTests {
 	public void indexModelCoinsLadderShouldResolveToUsers() {
 
 		ExtendedModelMap model = new ExtendedModelMap();
-		indexController.getIndex(model);
+		indexController.getIndex(model, null);
 
 		Flux<UserStat> flux = (Flux<UserStat>) model.get("coinsLadder");
 

@@ -24,6 +24,7 @@ import org.dogepool.reactiveboot.domain.UserStatRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * @author Mark Paluch
@@ -37,20 +38,28 @@ public class IndexController {
 	DogeProperties dogeProperties;
 
 	@GetMapping(path = "/")
-	String getIndex(Model model) {
+	String getIndex(Model model, @RequestParam(required = false) Integer hashrateFilter) {
 
 		model.addAttribute("poolName", dogeProperties.getPoolName());
 
-		model.addAttribute("hashLadder",
-				userStatRepository.findTop10ByOrderByHashrateDesc());
+		model.addAttribute(
+				"hashLadder",
+				userStatRepository.findTop10ByOrderByHashrateDesc().filter(
+						userStat -> hashrateFilter == null
+								|| userStat.getHashrate() > hashrateFilter));
 
-		model.addAttribute("coinsLadder",
-				userStatRepository.findTop10ByOrderByTotalCoinsMinedDesc());
+		model.addAttribute(
+				"coinsLadder",
+				userStatRepository.findTop10ByOrderByTotalCoinsMinedDesc().filter(
+						userStat -> hashrateFilter == null
+								|| userStat.getHashrate() > hashrateFilter));
 
 		// TODO: Calculate the overall gigaHashrate and miningUserCount taking
 		// a reactive approach
 		model.addAttribute("gigaHashrate", -1d);
 		model.addAttribute("miningUserCount", -1);
+
+		model.addAttribute("hashrateFilter", hashrateFilter != null ? hashrateFilter : "");
 
 		return "index";
 	}
